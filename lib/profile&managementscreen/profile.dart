@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:myfitnessapp/screens/intropage/widgets/textfields.dart';
 
 import '../../constants.dart';
@@ -32,6 +35,22 @@ class _userprofileState extends State<userprofile> {
       pickedFile = result.files.first;
     });
   }
+  File ?image;
+  Future imagepicked() async{
+
+    final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+
+    if(image == null) return;
+
+
+    final temp = File(image.path);
+    this.image = temp;
+
+
+
+  }
+
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery
@@ -165,10 +184,10 @@ class _userprofileState extends State<userprofile> {
 
                                     width: 150,
                                     height: 150,
-                                    child: pickedFile != null? ClipRRect
+                                    child: image != null? ClipRRect
                                       (
                                         borderRadius: BorderRadius.circular(100),
-                                        child: Image.asset("exercises/shoulder.jpg",
+                                        child: Image.file(image!,
                                           fit: BoxFit.cover,
                                         )): ClipRRect
                                       (
@@ -185,10 +204,10 @@ class _userprofileState extends State<userprofile> {
 
                               cardinfo(
 
-                                signout: "Sign out",
+                                signout: "open gallery",
                                 ontap: (){
-
-                                  FirebaseAuth.instance.signOut();
+                                  imagepicked();
+                                  //FirebaseAuth.instance.signOut();
                                 },
                               ),
 
@@ -205,7 +224,8 @@ class _userprofileState extends State<userprofile> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   GestureDetector(
-                                    onTap: () {},
+                                    onTap: () {
+                                    },
                                     child: Container(
                                       width: Responsive.isDesktop(context)
                                           ? width * 0.4

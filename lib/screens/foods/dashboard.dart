@@ -11,6 +11,7 @@ import '../../model/dailytrack.dart';
 import '../../model/data.dart';
 import '../../model/products.dart';
 import '../dashboard/foodfeature.dart';
+import 'addtorecipes.dart';
 import 'fooddescriptionpage.dart';
 import 'fooddescriptionpage2.dart';
 import 'foodtile.dart';
@@ -63,7 +64,7 @@ class _dashboardssState extends State<dashboardss> {
     return Scaffold(
 
 
-      floatingActionButton:Row(
+      floatingActionButton: addrecipes.isNotEmpty ? Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
            Text('Add recipes',
@@ -77,12 +78,14 @@ class _dashboardssState extends State<dashboardss> {
           // https://m3.material.io/components/floating-action-button/specs#669a1be8-7271-48cb-a74d-dd502d73bda4
           FloatingActionButton.small(
             onPressed: () {
-              // Add your onPressed code here!
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => addtorecipes(
+                addrecipes: addrecipes,
+              )));
             },
             child: const Icon(Icons.add),
           ),
         ],
-      ) ,
+      ) :null ,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

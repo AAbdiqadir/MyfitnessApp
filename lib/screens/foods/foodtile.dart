@@ -112,7 +112,7 @@ class _FoodtileState extends State<Foodtile> {
             Checkbox(
               // checkColor: Colors.white,
               // fillColor: MaterialStateProperty.resolveWith(getColor),
-              value: widget.value ?? widget.value ,
+              value: widget.value ?? false,
               onChanged: widget.onchanged
             )
           ],

@@ -379,12 +379,9 @@ class fooddetailsState extends State<fooddetails> {
                             var uuid = Uuid();
 
                             String DOCID = uuid.v4();
-                            dailytrack daily = dailytrack(name: widget.Productdetail.name,
-                                image:  widget.Productdetail.image, calories:  widget.Productdetail.calories,
-                                fatcont:  widget.Productdetail.fatcont, carbcont:  widget.Productdetail.carbcont,
-                                proteincont:  widget.Productdetail.proteincont, meal: SelectedOption.toString(),
-                                ServingSize:  widget.Productdetail.ServingSize, noofServings:  selectedvalue.toString(),
-                                dateTime: s, id: DOCID);
+                            dailytrack daily = dailytrack( meal: SelectedOption.toString(),
+                                noofServings:  selectedvalue.toString(),
+                                dateTime: s, id: DOCID, Productid: widget.Productdetail.FoodID);
 
                             Provider.of<CartModel>(context, listen: false).addmeal(daily, DOCID);
 

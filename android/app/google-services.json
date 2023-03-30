@@ -7,7 +7,36 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:313221201439:android:e0385fe521d431eb241f2a",
+        "mobilesdk_app_id": "1:313221201439:android:96324f38df989fc9241f2a",
+        "android_client_info": {
+          "package_name": "com.example.fitnessapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "313221201439-qckghiaeatpndcg3d0ud5m0v75entj4g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyByO_pVTAkMWXWQA5nCX1CP76ctZgWKbsY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "313221201439-qckghiaeatpndcg3d0ud5m0v75entj4g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:313221201439:android:afcda044d6d7121e241f2a",
         "android_client_info": {
           "package_name": "com.example.myfitnessapp"
         }

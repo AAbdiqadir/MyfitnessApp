@@ -5,7 +5,9 @@ import 'package:myfitnessapp/constants.dart';
 import 'package:myfitnessapp/constants/headers.dart';
 import 'package:myfitnessapp/screens/searchscreen/item_tile.dart';
 import 'package:myfitnessapp/screens/dashboard/workouts.dart';
+import 'package:provider/provider.dart';
 
+import '../../model/data.dart';
 import 'chart.dart';
 import '../caloriespage/chartcard.dart';
 import '../../responsive_design.dart';
@@ -38,6 +40,16 @@ class _dashboardState extends State<dashboard> {
     ["Carbs", "images/rice.png"],
 
   ];
+  void initState(){
+
+
+      Provider.of<CartModel>(context, listen: false).fetchmeals();
+      Provider.of<CartModel>(context, listen: false).fetchProducts();
+
+
+    super.initState();
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -187,7 +199,7 @@ class _dashboardState extends State<dashboard> {
                               padding:  EdgeInsets.all( 14.0),
                               child: GridView.builder(
                                 shrinkWrap: true,
-                                 // physics: NeverScrollableScrollPhysics(),
+                                 physics: NeverScrollableScrollPhysics(),
                                   itemCount: Exercises.length,
                                   gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount
                                     (crossAxisCount: _size.width <593 ? 2 :3,

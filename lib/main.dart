@@ -55,30 +55,30 @@ class MyApp extends StatelessWidget {
     create: (context) => MenuAppController()
     ),
     ],
-    child: MaterialApp(
+    child: GetMaterialApp(
     debugShowCheckedModeBanner: false,
 
 
     title: 'Flutter Admin Panel',
     theme: ThemeData.light().copyWith(
-    scaffoldBackgroundColor: calbg,
+    scaffoldBackgroundColor:  Colors.grey[300],
     textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
         .apply(bodyColor: Colors.white),
     canvasColor: Colors.grey[200],
     ),
-    home: Homepage()
-    // home: StreamBuilder<User?>(
-    //   stream: FirebaseAuth.instance.authStateChanges(),
-    //   builder: (context,snapshot){
-    //     if(snapshot.hasData){
-    //       return Homepage();
-    //     }
-    //     else{
-    //       return intropage();
-    //     }
-    //
-    //   },
-    // ),
+
+    home: StreamBuilder<User?>(
+      stream: FirebaseAuth.instance.authStateChanges(),
+      builder: (context,snapshot){
+        if(snapshot.hasData){
+          return Homepage();
+        }
+        else{
+          return intropage();
+        }
+
+      },
+    ),
     )
 
     );

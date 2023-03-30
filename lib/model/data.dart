@@ -1,6 +1,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:myfitnessapp/model/dailymeal.dart';
 import 'package:myfitnessapp/model/products.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -118,11 +119,33 @@ class CartModel extends ChangeNotifier {
   }
   List<dailytrack> _meals = [];
 
-  Future<void> fetchmeals( ) async {
-    final snapshot = await FirebaseFirestore.instance.collection('cart').doc("").collection("meals").get();
+  List<dailymeal> allmeals = [];
+  List<dailymeal> get allmeals_ => allmeals;
+  void  getallmeal()  {
+
+    for (int i = 0; i<_meals.length; i++){
+
+      Product products_ = _products.firstWhere((element) => element.FoodID == _meals[i].Productid);
+
+      dailymeal dailys = dailymeal(product: products_, mealfor_day: _meals[i]);
+
+      allmeals.add(dailys);
+    }
+
+  }
+
+  Future<void> fetchmeals() async {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final  user = FirebaseAuth.instance.currentUser;
+    final uid = user?.uid;
+    final snapshot = await FirebaseFirestore.instance.collection('cart').doc(uid).collection("meals").get();
     //final document = users.doc(DocID);
     final list = snapshot.docs.map((doc) => dailytrack.fromSnapshot(doc)).toList();
     _meals = list;
+    allmeals.clear();
+
+    getallmeal();
+
     notifyListeners();
   }
 

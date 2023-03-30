@@ -5,7 +5,7 @@ import 'package:myfitnessapp/responsive_design.dart';
 
 import '../../constants.dart';
 
-class Foodtile extends StatelessWidget {
+class Foodtile extends StatefulWidget {
   final String title;
   final String ?ingredient;
   final String image;
@@ -15,8 +15,9 @@ class Foodtile extends StatelessWidget {
   final Function()? press;
   final color;
   final textcolor;
-
-  const Foodtile({
+  void Function(bool?)? onchanged;
+  bool?  value;
+   Foodtile({
     Key? key,
     required this.title,
     this.ingredient,
@@ -26,28 +27,53 @@ class Foodtile extends StatelessWidget {
     this.description,
     this.press,
     this.color = Colors.grey,
-    this.textcolor = calbg
+    this.textcolor = calbg,
+    this.onchanged,
+     this.value,
+
 
   }) : super(key: key);
 
   @override
+  State<Foodtile> createState() => _FoodtileState();
+}
+
+class _FoodtileState extends State<Foodtile> {
+
+
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: press,
+      onTap: widget.press,
       child: Container(
         margin: !Responsive.isDesktop(context)? EdgeInsets.all(5): EdgeInsets.all(5),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          color: color[200],
+          color: widget.color[200],
         ),
 
         width: 250,
         height: 270,
 
+        // child:CheckboxListTile(
+        //   title: Text("Ahmed"),
+        //
+        //   value: _isChecked,
+        //   onChanged: (bool? newValue) {
+        //     setState(() {
+        //       _isChecked = newValue!;
+        //     });
+        //   },
+        // //  controlAffinity: ListTileControlAffinity.leading,  //  <-- leading Checkbox
+        // ) ,
+
+
         child: Row(
           //mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+
+
 
 
             Padding(
@@ -59,7 +85,7 @@ class Foodtile extends StatelessWidget {
                   borderRadius: const BorderRadius.all(Radius.circular(10)),
                   border: Border.all(color: Colors.white10),
                   image:DecorationImage(
-                      image: NetworkImage(image,
+                      image: NetworkImage(widget.image,
 
 
 
@@ -69,31 +95,29 @@ class Foodtile extends StatelessWidget {
                 ),
                 child: SizedBox(
                   height: double.infinity,
-                  width: 70,
-                  // decoration: BoxDecoration(
-                  //  // borderRadius: BorderRadius.circular(34),
-                  //
-                  // ),
-
-                 // child: Image.network(image,
-
-
-
-
+                  width: 50,
 
                 ),
               ),
             ),
 
 
-            Text(title,
+            Text(widget.title,
                 style: GoogleFonts.openSans(
                     color: Color(0xFF022323),
                     fontSize: 13, fontWeight:  FontWeight.w400)
-            )
+            ),
 
+            Spacer(),
+            Checkbox(
+              // checkColor: Colors.white,
+              // fillColor: MaterialStateProperty.resolveWith(getColor),
+              value: widget.value ?? widget.value ,
+              onChanged: widget.onchanged
+            )
           ],
-        ),
+
+        )
       ),
     );
   }

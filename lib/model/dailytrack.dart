@@ -4,44 +4,33 @@ import 'package:myfitnessapp/model/products.dart';
 
 
 class dailytrack {
-  String  name;
-  String image;
-  int  calories;
-  int  fatcont;
-  int carbcont;
-  int proteincont;
+
   String meal;
-  String ServingSize;
+
   String noofServings;
   String dateTime;
   String id;
 
+  String Productid;
+
 
 
   dailytrack({
-    required this.name,
-    required this.image,
-    required this.calories,
-    required this.fatcont,
-    required this.carbcont,
-    required this.proteincont,
+
     required this.meal,
-    required this.ServingSize,
+
     required this.noofServings,
     required this.dateTime,
     required this.id,
+    required this.Productid,
   });
 
   Map<String,dynamic>toJon()=>{
-    'name': name,
-    'image': image,
-    'calories': calories,
-    'fatcont': fatcont,
-    'carbcont': carbcont,
-    'proteincont': proteincont,
+
     "noofServings":noofServings,
     "meal":    meal,
-    "ServingSize":ServingSize,
+    "Productid":Productid,
+
     "id":id,
     "dateTime": dateTime
 
@@ -49,15 +38,10 @@ class dailytrack {
 
 
   dailytrack.fromSnapshot(snapshot)
-      : name = snapshot.data()["name"],
-        image = snapshot.data()["image"],
-        calories = snapshot.data()["calories"],
-        fatcont = snapshot.data()["fatcont"],
-        carbcont = snapshot.data()["carbcont"],
-        proteincont = snapshot.data()["proteincont"],
+      :
         noofServings = snapshot.data()["noofServings"],
         meal = snapshot.data()["meal"],
-        ServingSize = snapshot.data()["ServingSize"],
+        Productid = snapshot.data()["Productid"],
         id = snapshot.data()["id"],
         dateTime = snapshot.data()["dateTime"];
 

@@ -16,6 +16,7 @@ import '../../constants.dart';
 import '../../constants/headers.dart';
 import '../../constants/navigationbar.dart';
 import '../../constants/sidemenu.dart';
+import '../../model/dailymeal.dart';
 import '../../model/dailytrack.dart';
 import '../../model/data.dart';
 import '../../responsive_design.dart';
@@ -79,7 +80,7 @@ class _caloriespageState extends State<caloriespage> {
     ["Water", "1.00", "images/water.png", Colors.blue],
   ];
   var selected = "Lunch";
-  late List <dailytrack> meals;
+  late List <dailymeal> meals;
   @override
   Widget build(BuildContext context) {
     final Size _size = MediaQuery
@@ -119,7 +120,7 @@ class _caloriespageState extends State<caloriespage> {
                   builder: (context, value, child) {
                     Provider.of<CartModel>(context, listen: false).fetchmeals();
                     String s = DateFormat('yyyy-MM-dd').format(date);
-                    meals = value.meals.where((element) => element.dateTime == s && element.meal== selected).toList();
+                    meals = value.allmeals_.where((element) => element.mealfor_day.dateTime == s ).toList();
                      return Column(
 
 
@@ -223,7 +224,7 @@ class _caloriespageState extends State<caloriespage> {
                                         mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
                                           Material(
-                                            child: Text(DateFormat('yyyy-MM-dd').format(date),
+                                            child: Text(DateFormat('yyyy-MM-dd').format(date) == s? "Today": DateFormat('yyyy-MM-dd').format(date),
                                               style: _isHovered == false?   GoogleFonts.openSans(
                                                   fontSize: 15,
                                                   color: Colors.red,
@@ -287,12 +288,12 @@ class _caloriespageState extends State<caloriespage> {
                                                 color: Colors.grey[200],
                                                 borderRadius: BorderRadius.circular(8)),
                                             child: ListTile(
-                                              leading: Image.asset(
-                                                meals[index].image,
+                                              leading: Image.network(
+                                                meals[index].product.image,
                                                 height: 36,
                                               ),
                                               title: Text(
-                                                meals[index].name,
+                                                meals[index].product.name,
                                                   style: GoogleFonts.openSans(
                                                       fontSize: 16,
                                                       fontWeight: FontWeight.w400,
@@ -303,7 +304,7 @@ class _caloriespageState extends State<caloriespage> {
                                               trailing: IconButton(
                                                   icon: const Icon(Icons.delete),
                                                   onPressed: () {
-                                                    Provider.of<CartModel>(context, listen: false).deleteField(meals[index].id);
+                                                    // Provider.of<CartModel>(context, listen: false).deleteField(meals[index]);
                                                   }
                                               ),
                                             ),

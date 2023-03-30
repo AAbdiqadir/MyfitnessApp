@@ -1,6 +1,10 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:myfitnessapp/model/dailymeal.dart';
+import 'package:myfitnessapp/model/products.dart';
 import 'package:myfitnessapp/responsive_design.dart';
 import 'package:provider/provider.dart';
 
@@ -16,14 +20,15 @@ class  caltoday extends StatefulWidget {
   State<caltoday> createState() => _caltodayState();
 }
 
-      
+
 
 class _caltodayState extends State<caltoday> {
 
   DateTime date = DateTime.now();
 
+
   var selected = "Breakfast";
-  late List <dailytrack> ahmed;
+  late List <dailymeal> ahmed;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +51,9 @@ class _caltodayState extends State<caltoday> {
     builder: (context, value, child) {
 
      String s = DateFormat('yyyy-MM-dd').format(date);
-     //ahmed = value.meals.where((element) => element.dateTime == s && element.meal== selected).toList();
+
+     ahmed = value.allmeals_.where((element) => element.mealfor_day.dateTime == s ).toList();
+
      
 
       return Column(
@@ -75,11 +82,18 @@ class _caltodayState extends State<caltoday> {
       setState(() {
       selected = "Breakfast";
 
+      print(s);
+      print(value.allmeals_.length);
+
+
+
+
       });
       },
       onLunchTap: (){
       setState(() {
       selected = "Lunch";
+      print(value.allmeals_.length);
       });
       },
       DinnerTap: (){
@@ -99,8 +113,8 @@ class _caltodayState extends State<caltoday> {
                   .size
                   .width * 0.8 : null,
               child:
-              value.shopItems.isNotEmpty? ListView.builder(
-                itemCount: value.shopItems.length,
+              ahmed.isNotEmpty? ListView.builder(
+                itemCount: ahmed.length,
                 padding: EdgeInsets.all(7),
                 itemBuilder: (context, index) {
                   return Padding(
@@ -110,13 +124,13 @@ class _caltodayState extends State<caltoday> {
                           color: Colors.grey[200],
                           borderRadius: BorderRadius.circular(8)),
                       child: ListTile(
-                        leading: Image.asset(
-                          value.shopItems[index][2],
+                        leading: Image.network(
+                          ahmed[index].product.image,
                           height: 36,
                         ),
 
                         title: Text(
-                          value.shopItems[index][0],
+                          ahmed[index].product.name,
                             style: GoogleFonts.openSans(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w400,
@@ -128,6 +142,8 @@ class _caltodayState extends State<caltoday> {
                             color: Colors.black,
                             ),
                             onPressed: () {
+
+
 
                           //
                           //     Provider.of<CartModel>(context, listen: false).deleteField(ahmed[index].id);

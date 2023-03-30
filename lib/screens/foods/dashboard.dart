@@ -24,54 +24,7 @@ class dashboardss extends StatefulWidget {
 class _dashboardssState extends State<dashboardss> {
 
   late String ss ;
- // late Product product = Provider.of<CartModel>(context, listen: false).products.first;
-  // late Product product = Product(name: "Vegan salad bowl",
-  //     image: "images/banana.png",
-  //     calories: 20,
-  //     fatc
 
-  // Future<void> fetchProducts() async {
-  //   CollectionReference users = FirebaseFirestore.instance.collection('fooddetails');
-  //
-  //   final snapshot = await FirebaseFirestore.instance.collection('fooddetails').get();
-  //
-  //   snapshot.docs.forEach((element) {
-  //     Map<String, dynamic> obj = element.data();
-  //     obj.forEach((key, value) {
-  //
-  //     });
-  //   });
-  //
-  //
-  //
-  //
-  //
-  //
-  // }
-
-  // List<Product> ahmed =[];
-  // Future <void> getDocs() async {
-  //   QuerySnapshot querySnapshot = await FirebaseFirestore.instance.collection("fooddetails").get();
-  //
-  //
-  //   CollectionReference users = FirebaseFirestore.instance.collection('fooddetails');
-  //     querySnapshot.docs.forEach((element) {
-  //
-  //       //print(element.id);
-  //       final products = users.doc(element.id).snapshots().map((event) => Product.fromSnapshot(event)).toList();
-  //
-  //       products.then((value) => value.forEach((element) {
-  //         ahmed.add(element);
-  //       }));
-  //
-  //
-  //
-  //
-  //     });
-  //
-  //
-  //  // print(products.length);
-  // }
    Product? _productss;
   void setSearchString(String value) => setState(() {
     ss = value;
@@ -88,6 +41,8 @@ class _dashboardssState extends State<dashboardss> {
 
 
 
+
+
   @override
   void initState() {
     // TODO: implement initState
@@ -97,12 +52,38 @@ class _dashboardssState extends State<dashboardss> {
     //fetchProducts();
     super.initState();
   }
+  bool _isChecked = true;
+  late List <Product> addrecipes = [];
   @override
   Widget build(BuildContext context) {
     final Size _size = MediaQuery.of(context).size;
-    return Container(
 
-      child: SingleChildScrollView(
+
+
+    return Scaffold(
+
+
+      floatingActionButton:Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: <Widget>[
+           Text('Add recipes',
+              style: GoogleFonts.openSans(
+              color: Color(0xFF022323),
+              fontSize: 13,
+                  fontWeight:  FontWeight.w400)),
+          const SizedBox(width: 16),
+          // An example of the small floating action button.
+          //
+          // https://m3.material.io/components/floating-action-button/specs#669a1be8-7271-48cb-a74d-dd502d73bda4
+          FloatingActionButton.small(
+            onPressed: () {
+              // Add your onPressed code here!
+            },
+            child: const Icon(Icons.add),
+          ),
+        ],
+      ) ,
+      body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -122,7 +103,7 @@ class _dashboardssState extends State<dashboardss> {
       Consumer<CartModel>(
           builder: (context, value, child) {
            // Provider.of<CartModel>(context, listen: false).fetchProducts();
-            ahmed = value.products.where((element) => element.type == SelectedOption).toList();
+            ahmed = value.products;
 
             _productss ??= ahmed[0];
 
@@ -148,7 +129,10 @@ class _dashboardssState extends State<dashboardss> {
                          "random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. ",
                      color:  Colors.grey,
                      press:(){
-
+                       if(Responsive.isMobile(context))
+                         Navigator.of(context).push(MaterialPageRoute(builder: (context) => Fooddetailpage2(
+                           product: p,
+                         )));
 
                      }
 
@@ -156,6 +140,9 @@ class _dashboardssState extends State<dashboardss> {
                    )
                  .toList();
                  }
+              if (ss.isEmpty) {
+                searchResultTiles.clear();
+              }
               return Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -180,7 +167,7 @@ class _dashboardssState extends State<dashboardss> {
                                   search(
                                 onChanged:setSearchString
                                 )
-                                 
+
 
                                 ],
                               ),
@@ -256,7 +243,9 @@ class _dashboardssState extends State<dashboardss> {
                                               ), itemBuilder:
                                               (context,index)
                                           {
+
                                             return  Foodtile(
+
                                               press: () {
 
 
@@ -265,7 +254,7 @@ class _dashboardssState extends State<dashboardss> {
                                                 Navigator.of(context).push(MaterialPageRoute(builder: (context) => Fooddetailpage2(
                                                   product: ahmed[index],
                                                 )));
-                                                
+
                                                  // dailytrack daily = dailytrack(name: _products[0].name,
                                                  //     image: _products[0].image, calories: _products[0].calories,
                                                  //     fatcont: _products[0].fatcont, carbcont: _products[0].carbcont,
@@ -292,6 +281,20 @@ class _dashboardssState extends State<dashboardss> {
                                               "Contrary to popular belief, Lorem Ipsum is not simply "
                                                   "random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. ",
                                               color: index ==Index? Colors.brown: Colors.grey,
+                                              value: addrecipes.contains(ahmed[index]),
+                                              onchanged: (bool? newvalue){
+                                                setState(() {
+
+                                                  if(newvalue!){
+                                                    addrecipes.add(ahmed[index]);
+                                                  }
+                                                  else{
+                                                    addrecipes.remove(ahmed[index]);
+                                                  }
+
+
+                                                });
+                                              },
                                             );
 
                                           }
@@ -317,6 +320,7 @@ class _dashboardssState extends State<dashboardss> {
 
                                         ),
                                       ),
+
 
                             // Container(
                             //   width: _size.width > 754? _size.width *0.8: null,

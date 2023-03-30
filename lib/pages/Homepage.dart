@@ -42,13 +42,7 @@ class _HomepageState extends State<Homepage> {
 
   }
 
-  void initState(){
-    print(_shopItems[0][0]);
-    Provider.of<CartModel>(context, listen: false).fetchmeals();
-    Provider.of<CartModel>(context, listen: false).fetchProducts();
-    super.initState();
 
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,6 +57,7 @@ class _HomepageState extends State<Homepage> {
         child:headers()
 
           ): null,
+
         //drawer: SideMenu(),
         // appBar: AppBar(
         //

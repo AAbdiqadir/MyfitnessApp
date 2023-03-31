@@ -5,9 +5,11 @@ import 'package:myfitnessapp/model/dailymeal.dart';
 import 'package:myfitnessapp/model/products.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:myfitnessapp/screens/intropage/intropage.dart';
 
 import 'dailytrack.dart';
 import 'exercises.dart';
+import 'ingredients.dart';
 
 
 
@@ -100,6 +102,20 @@ class CartModel extends ChangeNotifier {
         .catchError((error) => print("Failed to add user: $error"));
   }
 
+  Future<void> recipeingridents(Ingredient ingredient, String DocID)  {
+    CollectionReference docs = FirebaseFirestore.instance.collection('recipeingredients');
+
+    final document = docs.doc(DocID);
+    //Ingredient ingredient = Ingredient(products: products);
+    final json = ingredient.toJon();
+    return document.set(
+      json)
+        .then((value) => print("food Added"),
+    )
+        .catchError((error) => print("Failed to add user: $error"));
+  }
+
+
   Future<void> addfood(Product products, String DocID) {
     final FirebaseAuth auth = FirebaseAuth.instance;
     final  user = FirebaseAuth.instance.currentUser;
@@ -133,7 +149,16 @@ class CartModel extends ChangeNotifier {
     }
 
   }
+  List<Ingredient>  ingredient =[];
+  List<Ingredient> get prodingredient => ingredient;
+  Future<void> ingredientid( ) async {
+    final snapshot = await FirebaseFirestore.instance.collection('recipeingredients').get();
+    //final document = users.doc(DocID);
+    final list = snapshot.docs.map((doc) => Ingredient.fromSnapshot(doc)).toList();
+    ingredient = list;
 
+    notifyListeners();
+  }
   Future<void> fetchmeals() async {
     final FirebaseAuth auth = FirebaseAuth.instance;
     final  user = FirebaseAuth.instance.currentUser;

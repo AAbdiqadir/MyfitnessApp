@@ -45,6 +45,7 @@ class _dashboardState extends State<dashboard> {
 
       Provider.of<CartModel>(context, listen: false).fetchmeals();
       Provider.of<CartModel>(context, listen: false).fetchProducts();
+      Provider.of<CartModel>(context, listen: false).ingredientid();
 
 
     super.initState();

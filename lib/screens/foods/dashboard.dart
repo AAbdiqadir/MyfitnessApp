@@ -33,10 +33,10 @@ class _dashboardssState extends State<dashboardss> {
   });
 
 
-  List <String> foods= ['Vegetable', "Animal products","Fruits","Fats", "Carbs"];
+  List <String> foods= ["Recipe", "Food"];
 
   int Index = 0;
-  String? SelectedOption = "Vegetable";
+  String? SelectedOption = "Food";
    late List <Product> ahmed;
   List<Widget> searchResultTiles = [];
 
@@ -106,7 +106,7 @@ class _dashboardssState extends State<dashboardss> {
       Consumer<CartModel>(
           builder: (context, value, child) {
            // Provider.of<CartModel>(context, listen: false).fetchProducts();
-            ahmed = value.products;
+            ahmed = value.products.where((element) => element.type == SelectedOption).toList();
 
             _productss ??= ahmed[0];
 

@@ -12,7 +12,7 @@ class headers extends StatelessWidget {
   const headers({Key? key,
     this.color = colors,
 
-  this.title = "title"}) : super(key: key);
+  this.title = "Dashboard"}) : super(key: key);
 
 
 
@@ -60,7 +60,7 @@ class headers extends StatelessWidget {
               SizedBox(
                 width: 10,
               ),
-              Text("Dashboard",
+              Text(title,
                 style: GoogleFonts.openSans(
                     color:colors[200],
                     fontSize: 20, fontWeight:  FontWeight.w500),

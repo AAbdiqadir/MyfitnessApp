@@ -54,6 +54,15 @@ class _caltodayState extends State<caltoday> {
 
      ahmed = value.allmeals_.where((element) => element.mealfor_day.dateTime == s ).toList();
 
+     int total = 0;
+
+     for (int i = 0; i <ahmed.length ;i++ ){
+
+       total = total + ahmed[i].product.calories;
+
+     }
+
+
      
 
       return Column(
@@ -64,13 +73,13 @@ class _caltodayState extends State<caltoday> {
 
           Text("Today",
             style: openSans.copyWith(
-              fontSize: 13.0,
+              fontSize: 15.0,
               fontWeight: FontWeight.w500,
               color: AppColorss.textColor,
             ),),
 
           Chart(
-          total: 202.2,
+          total: ahmed.isEmpty? 0: total,
 
           ),
 
@@ -78,31 +87,31 @@ class _caltodayState extends State<caltoday> {
           SizedBox(
               width: Responsive.isDesktop(context)? _size.width *0.4:Responsive.isTablet(context)? _size.width *0.4:  _size.width *0.8,
               child: dailycals(
-      onBreakfastTap: (){
-      setState(() {
-      selected = "Breakfast";
+                  onBreakfastTap: (){
+                  setState(() {
+                  selected = "Breakfast";
 
-      print(s);
-      print(value.allmeals_.length);
-
-
+                  print(s);
+                  print(value.allmeals_.length);
 
 
-      });
-      },
-      onLunchTap: (){
-      setState(() {
-      selected = "Lunch";
-      print(value.allmeals_.length);
-      });
-      },
-      DinnerTap: (){
-      setState(() {
-      selected = "Dinner";
-      });
-      },
-      selected: selected,
-      )),
+
+
+                  });
+                  },
+                  onLunchTap: (){
+                  setState(() {
+                  selected = "Lunch";
+                  print(value.allmeals_.length);
+                  });
+                  },
+                  DinnerTap: (){
+                  setState(() {
+                  selected = "Dinner";
+                  });
+                  },
+                  selected: selected,
+                  )),
 
 
 

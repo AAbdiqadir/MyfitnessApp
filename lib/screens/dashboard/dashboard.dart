@@ -29,14 +29,14 @@ class _dashboardState extends State<dashboard> {
     ["Back workouts",  "Weight Lifting", "exercises/biceps.jpg"],
     ["Cardio", "HIIT Workout", "exercises/cardio.jpg"],
     ["Shoulder", "Weight Lifting", "exercises/pexels-andres-ayrton-6550851.jpg"],
-    ["Legs",  "Weight Lifting", "exercises/pexels-anete-lusina-4793199.jpg"],
-    ["Abs",  "HIIT Workout", "exercises/pexels-julia-larson-6455946.jpg"],
+    // ["Legs",  "Weight Lifting", "exercises/pexels-anete-lusina-4793199.jpg"],
+    // ["Abs",  "HIIT Workout", "exercises/pexels-julia-larson-6455946.jpg"],
   ];
 
   final List Foods = const [
 
-    ["Vegetables&Fats",  "images/dish-clipart-vegetable-salad-14.png"],
-    ["Animal products",  "images/ap.png"],
+    ["Foods",  "images/ap.png"],
+    ["Recipes",  "images/dish-clipart-vegetable-salad-14.png"],
     ["Carbs", "images/rice.png"],
 
   ];

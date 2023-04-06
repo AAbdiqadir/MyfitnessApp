@@ -1,5 +1,7 @@
 
 import 'package:flutter/material.dart';
+
+import '../../../constants.dart';
 var index= "Breakfast";
 class dailycals extends StatefulWidget {
    dailycals({Key? key,
@@ -51,6 +53,8 @@ class _dailycalsState extends State<dailycals> {
                     Expanded(child: Material(
                       color: Colors.transparent,
                       child: InkWell(
+                        onTap: widget.onBreakfastTap
+                        ,
                         child: Container(
                           decoration: widget.selected == "Breakfast"? BoxDecoration(
                               borderRadius: BorderRadius.circular(15),
@@ -60,14 +64,18 @@ class _dailycalsState extends State<dailycals> {
                             padding: const EdgeInsets.symmetric(horizontal: 5.0,
                                 vertical: 5),
                             child: Text("Breakfast",
-                            ),
+                              style: openSans.copyWith(
+                                fontSize: 12.0,
+                                fontWeight: FontWeight.w500,
+                                color: widget.selected == "Breakfast"? Colors.white: AppColorss.textColor,
+                              ),),
                           ),
                         ),
-                        onTap: widget.onBreakfastTap
-                        ,
                       ),
                     )),
                     Expanded(child: InkWell(
+                      onTap:  widget.onLunchTap
+                      ,
                       child: Container(
                         decoration: widget.selected == "Lunch"? BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
@@ -76,13 +84,18 @@ class _dailycalsState extends State<dailycals> {
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 5.0,
                               vertical: 5),
-                          child: Text("Lunch"),
+                          child: Text("Lunch",
+                            style: openSans.copyWith(
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.w500,
+                            color: widget.selected == "Lunch"? Colors.white: AppColorss.textColor,
+                          ),),
                         ),
                       ),
-                      onTap:  widget.onLunchTap
-                      ,
                     )),
                     Expanded(child: InkWell(
+                      onTap:  widget.DinnerTap
+                      ,
                       child: Container(
                         decoration: widget.selected == "Dinner"? BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
@@ -91,11 +104,14 @@ class _dailycalsState extends State<dailycals> {
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 5.0,
                               vertical: 5),
-                          child: Text("Dinner"),
+                          child: Text("Dinner",
+                            style: openSans.copyWith(
+                              fontSize: 12.0,
+                              fontWeight: FontWeight.w500,
+                              color: widget.selected == "Dinner"? Colors.white: AppColorss.textColor,
+                            ),),
                         ),
                       ),
-                      onTap:  widget.DinnerTap
-                      ,
                     )),
 
                   ],

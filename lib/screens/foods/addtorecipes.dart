@@ -293,7 +293,7 @@ class addtorecipesState extends State<addtorecipes> {
                                     (context,index)
                                 {
 
-                                  return  Foodtile(title: widget.addrecipes[index].name, image: widget.addrecipes[index].image);
+                                  return  Foodtile(title: widget.addrecipes[index].name, image: widget.addrecipes[index].image, isuser: '', );
 
                                 }
 

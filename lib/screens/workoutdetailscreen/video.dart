@@ -62,6 +62,7 @@ class _videoplayerState extends State<videoplayer> {
   Widget build(BuildContext context) {
     return  _controller!= null? Container(
         alignment: Alignment.topCenter,
+        height: 500,
         child: VideoPlayer( _controller),
     ):
     Container(

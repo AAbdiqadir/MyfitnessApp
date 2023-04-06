@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
 import 'package:myfitnessapp/screens/intropage/widgets/textfields.dart';
 
 import '../../constants.dart';
@@ -67,115 +68,140 @@ class _RegisterState extends State<Register> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
-    return Scaffold(
-      backgroundColor: Colors.grey[300],
-      appBar: Responsive.isMobile(context)? PreferredSize(
-          preferredSize: Size(double.infinity, 50),
-          child: Container(
-            color:  !Responsive.isMobile(context)? Colors.black: Colors.grey[300],
-            child:
-            Column(
-              children: [
-                SizedBox(
-                  height:  height*0.05,
-                ),
-                Row(
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.grey[300],
+        appBar: Responsive.isMobile(context)? PreferredSize(
+            preferredSize: Size(double.infinity, 80),
+            child: Padding(
+              padding:  EdgeInsets.symmetric(vertical: 15.0),
+              child: Container(
+                color:  !Responsive.isMobile(context)? Colors.black: Colors.grey[300],
+                child:
+                Column(
                   children: [
-                    SizedBox(
-                      width: 10,
+                    // SizedBox(
+                    //   height:  height*0.05,
+                    // ),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 10,
+                        ),
+                        IconButton(onPressed: () {
+                          Get.back(
+                          );
+                        }, icon: Icon(Icons.arrow_back,
+                            color: Responsive.isMobile(context)
+                                ? Colors.black
+                                : Colors.grey[300]),)
+                      ],
                     ),
-                    IconButton( onPressed: () {
-
-
-                        Get.back();
-
-
-                    }, icon: Icon(Icons.arrow_back,
-                        color: Responsive.isMobile(context)? Colors.black: Colors.grey[300]),)
                   ],
                 ),
-              ],
-            ),
-          )
+              ),
+            )
 
 
-      ): null,
-      body: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          if(!Responsive.isMobile(context))
+        ): null,
+        body: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            if(!Responsive.isMobile(context))
+              Expanded(
+
+                child: Container(
+                    height: height,
+                    width: double.infinity,
+
+
+                  decoration: BoxDecoration(
+                    image:DecorationImage(
+                        image: AssetImage("exercises/young-fitness-man-studio.jpg",
+
+
+
+                        ),
+                        fit: BoxFit.cover
+                    ),
+                    // height: height,
+
+
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          child:
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: 10,
+                              ),
+
+
+                              IconButton(onPressed: (){}, icon: Icon(Icons.arrow_back,
+                                  color: Colors.grey[300]
+
+                              ))
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
+
+                  ),
+                ),
+              ),
             Expanded(
 
               child: Container(
-                  height: height,
-                  width: double.infinity,
+                height: height,
+                width: double.infinity,
+                //margin: EdgeInsets.symmetric(horizontal: ResponsiveWidget.isSmallScreen(context)? height * 0.032 : height * 0.12),
+                color: Colors.grey[300],
+                child: SingleChildScrollView(
 
+                  child: SizedBox(
+                    width: 200,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
 
-                decoration: BoxDecoration(
-                  image:DecorationImage(
-                      image: AssetImage("exercises/young-fitness-man-studio.jpg",
+                      children: [
+                        Expanded(
+                          child: SizedBox(
 
-
-
-                      ),
-                      fit: BoxFit.cover
-                  ),
-                  // height: height,
-
-
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        child:
-                        Row(
-                          children: [
-                            SizedBox(
-                              width: 10,
-                            ),
-
-
-                            IconButton(onPressed: (){}, icon: Icon(Icons.arrow_back,
-                                color: Colors.grey[300]
-
-                            ))
-                          ],
-                        ),
-                      ),
-                    )
-                  ],
-
-                ),
-              ),
-            ),
-          Expanded(
-
-            child: Container(
-              height: height,
-              width: double.infinity,
-              //margin: EdgeInsets.symmetric(horizontal: ResponsiveWidget.isSmallScreen(context)? height * 0.032 : height * 0.12),
-              color: Colors.grey[300],
-              child: SingleChildScrollView(
-
-                child: SizedBox(
-                  width: 200,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-
-                    children: [
-                      Expanded(
-                        child: SizedBox(
-
-                          child: Form(
-                            key: formkey,
                             child: Column(
 
                               children: [
-                                SizedBox(height: Responsive.isMobile(context)? height * 0.05:height * 0.2),
+                                SizedBox(
+                                  height: !Responsive.isMobile(context)
+                                      ? height * 0.2
+                                      : null,
+                                ),
+                                SizedBox(height: Responsive.isMobile(context)
+                                    ? height * 0.1
+                                    : height * 0.1,
+
+                                  child: Container(
+
+                                    decoration: BoxDecoration(
+
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(10))
+                                    ),
+                                    child: Center(
+
+                                      child: Lottie.network(
+                                          "https://assets7.lottiefiles.com/packages/lf20_ucbyrun5.json",
+                                          fit: BoxFit.cover
+                                      ),
+                                    ),
+                                  ),
+                                ),
 
 
 
@@ -321,14 +347,14 @@ class _RegisterState extends State<Register> {
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

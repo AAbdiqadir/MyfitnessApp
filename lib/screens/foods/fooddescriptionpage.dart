@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -57,6 +59,7 @@ class fooddetailsState extends State<fooddetails> {
   late int total = proteincont+carbcont+fatcont;
 
 
+  // final uid = user?.uid;
 
   List <String> meals= ["Breakfast", "Lunch","Dinner"];
 
@@ -70,10 +73,19 @@ class fooddetailsState extends State<fooddetails> {
 
 
   }
-  Ingredient? ingredient ;
+  late Ingredient ingredient ;
 
   List <Product> products = [];
-
+  // List<Ingredient>  ingredientss =[];
+  // List<Ingredient> get prodingredient => ingredientss;
+  // Future<void> ingredientid( ) async {
+  //   final snapshot = await FirebaseFirestore.instance.collection('recipeingredients').get();
+  //   //final document = users.doc(DocID);
+  //   final list = snapshot.docs.map((doc) => Ingredient.fromSnapshot(doc)).toList();
+  //
+  //   ingredientss = list;
+  //
+  // }
 
 
   @override
@@ -84,19 +96,19 @@ class fooddetailsState extends State<fooddetails> {
 
         child:Consumer<CartModel>(
         builder: (context, value, child) {
-          if (widget.Productdetail.type == "Recipe" )
+          if (widget.Productdetail.type == "Recipe" && products.isEmpty )
           {
 
 
-            //ingredient = value.prodingredient.firstWhere((element) => element.id == widget.Productdetail.FoodID );
+            ingredient = value.prodingredient.firstWhere((element) => element.id == widget.Productdetail.FoodID );
 
-            // for (int i=0 ;i <ingredient.products.length; i++){
-            //
-            //   Product product = value.products.firstWhere((element) => element.FoodID == ingredient.products[i]);
-            //
-            //   products.add(product);
-            //
-            // }
+            for (int i=0 ;i <ingredient.products.length; i++){
+
+              Product product = value.products.firstWhere((element) => element.FoodID == ingredient.products[i].toString());
+
+              products.add(product);
+
+            }
 
             // Provider.of<CartModel>(context, listen: false).prodingredient;
             //
@@ -107,7 +119,7 @@ class fooddetailsState extends State<fooddetails> {
             height: height < 750 ? height * 2 :
             Responsive.isMobile(context) && height > 750
                 ? height * 1.2
-                : height * 1.5
+                : height * 2.5
             ,
 
 
@@ -199,7 +211,7 @@ class fooddetailsState extends State<fooddetails> {
                                   Text('Serving size',
                                     style: openSans.copyWith(
                                       fontSize: 15.0,
-                                      fontWeight: FontWeight.w600,
+                                      fontWeight: FontWeight.w400,
                                       color: AppColorss.textColor,
                                     ),
                                   ),
@@ -228,6 +240,9 @@ class fooddetailsState extends State<fooddetails> {
                                       ),
                                     ),
                                   ),
+                                  SizedBox(
+                                    width: 16,
+                                  )
 
 
                                 ],
@@ -255,11 +270,12 @@ class fooddetailsState extends State<fooddetails> {
                                   Text('Number of serving',
                                     style: openSans.copyWith(
                                       fontSize: 15.0,
-                                      fontWeight: FontWeight.w600,
+                                      fontWeight: FontWeight.w400,
                                       color: AppColorss.textColor,
                                     ),
                                   ),
                                   Spacer(),
+
 
 
                                   CupertinoButton(
@@ -335,24 +351,20 @@ class fooddetailsState extends State<fooddetails> {
                             ),
                           ],
                         ),
-                        if(products.isNotEmpty)
-                        GridView.builder(
-                        shrinkWrap: true,
-                        itemCount: products.length,
-                        gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount
-                        (crossAxisCount: 2,//Responsive.isTablet(context) ? 2 :_size.width < 599? 2:3,
-                        childAspectRatio: Responsive.isTablet(context)? 2 :
-                        Responsive.isMobile(context)?2 :
-                        2,
-
-                        ), itemBuilder:
-                        (context,index)
-                            {
-                              return Foodtile(title: products[index].name, image: products[index].image);
 
 
-                            },
-                        ),
+                            //
+                            // itemCount: 1,
+                            //  itemBuilder:
+                            // (context,index)
+                            //     {
+                            //       return Text("data");
+                            //       //return Foodtile(title: products[index].name, image: products[index].image);
+                            //
+                            //
+                            //     },
+                            // ),
+
 
 
 
@@ -373,8 +385,8 @@ class fooddetailsState extends State<fooddetails> {
 
                                   Text('Type',
                                     style: openSans.copyWith(
-                                      fontSize: 20.0,
-                                      fontWeight: FontWeight.w700,
+                                      fontSize: 15.0,
+                                      fontWeight: FontWeight.w400,
                                       color: AppColorss.textColor,
                                     ),
                                   ),
@@ -422,7 +434,69 @@ class fooddetailsState extends State<fooddetails> {
                             ),
                           ],
                         ),
+                        SizedBox(height: height * 0.064),
+                        if(widget.Productdetail.type == "Recipe")
+                          Text("Ingredients",
+                            style: openSans.copyWith(
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.w500,
+                              color: AppColorss.textColor,
+                            ),),
 
+                        Container(
+                          width: Responsive.isDesktop(context)
+                              ? width * 0.4
+                              : Responsive.isTablet(context)
+                              ? width * 0.4
+                              : width < 552 ? width * 0.85 : width * 0.7,
+                          child: Column(
+                            children: [
+                              ...List.generate(
+                                  products.length,
+                                      (index) => Foodtile(title: products[index].name, image: products[index].image,isuser: "",)
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        if(widget.Productdetail.type == "Recipe")
+                          SizedBox(height: height * 0.064),
+                        if(widget.Productdetail.type == "Recipe")
+                          Text("Instruction",
+                            style: openSans.copyWith(
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.w500,
+                              color: AppColorss.textColor,
+                            ),),
+                        if(widget.Productdetail.type == "Recipe")
+                          Container(
+                            width: Responsive.isDesktop(context)
+                                ? width * 0.4
+                                : Responsive.isTablet(context)
+                                ? width * 0.4
+                                : width < 552 ? width * 0.85 : width * 0.7,
+
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+
+                              children: [
+                                Text(
+                                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna '
+                                        'aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+
+
+
+                                    style: openSans.copyWith(
+                                      fontSize: 15.0,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.black,
+                                    )
+                                ),
+
+                              ],
+                            ),
+                          ),
+                        SizedBox(height: height * 0.064),
                         SizedBox(
                           width: Responsive.isDesktop(context)
                               ? width * 0.4
@@ -454,52 +528,65 @@ class fooddetailsState extends State<fooddetails> {
                             ],
                           ),
                         ),
+
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            GestureDetector(
-                              onTap: () {
 
-                                print(Provider.of<CartModel>(context, listen: false).ingredient.length);
-                                // DateTime now = DateTime.now();
-                                //
-                                // String s = DateFormat('yyyy-MM-dd').format(now);
-                                // print(s);
-                                //
-                                // var uuid = Uuid();
-                                //
-                                // String DOCID = uuid.v4();
-                                // dailytrack daily = dailytrack(
-                                //     meal: SelectedOption.toString(),
-                                //     noofServings: selectedvalue.toString(),
-                                //     dateTime: s,
-                                //     id: DOCID,
-                                //     Productid: widget.Productdetail.FoodID);
-                                //
-                                // Provider.of<CartModel>(context, listen: false)
-                                //     .addmeal(daily, DOCID);
-                              },
-                              child: Container(
-                                width: Responsive.isDesktop(context) ? width *
-                                    0.3 : Responsive.isTablet(context) ? width *
-                                    0.3 : width * 0.7,
-                                padding: const EdgeInsets.all(10),
+                            Column(
+                              children: [
 
-                                decoration: BoxDecoration(
-                                  color: Colors.black,
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                child: const Center(
-                                  child: Text(
-                                    "Add to meals",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16,
+                                GestureDetector(
+                                  onTap: () {
+
+
+                                    print("carb " +carbcont.toString());
+                                    print("Protein " +proteincont.toString());
+                                    print("Fat " +fatcont.toString());
+                                   // print("carb " +carbcont.toString());
+
+                                   // print(ingredient.products.length);
+                                   //  DateTime now = DateTime.now();
+                                   //
+                                   //  String s = DateFormat('yyyy-MM-dd').format(now);
+                                   //  print(s);
+                                   //
+                                   //  var uuid = Uuid();
+                                   //
+                                   //  String DOCID = uuid.v4();
+                                   //  dailytrack daily = dailytrack(
+                                   //      meal: SelectedOption.toString(),
+                                   //      noofServings: selectedvalue.toString(),
+                                   //      dateTime: s,
+                                   //      id: DOCID,
+                                   //      Productid: widget.Productdetail.FoodID);
+                                   //
+                                   //  Provider.of<CartModel>(context, listen: false)
+                                   //      .addmeal(daily, DOCID);
+                                  },
+                                  child: Container(
+                                    width: Responsive.isDesktop(context) ? width *
+                                        0.3 : Responsive.isTablet(context) ? width *
+                                        0.3 : width * 0.7,
+                                    padding: const EdgeInsets.all(10),
+
+                                    decoration: BoxDecoration(
+                                      color: Colors.black,
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    child: const Center(
+                                      child: Text(
+                                        "Add to meals",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 16,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
+                              ],
                             ),
 
                           ],

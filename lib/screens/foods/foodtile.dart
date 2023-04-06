@@ -13,6 +13,7 @@ class Foodtile extends StatefulWidget {
   final String? calories;
   final String ?description;
   final Function()? press;
+  final String isuser;
   final color;
   final textcolor;
   void Function(bool?)? onchanged;
@@ -30,6 +31,7 @@ class Foodtile extends StatefulWidget {
     this.textcolor = calbg,
     this.onchanged,
      this.value,
+     required this.isuser,
 
 
   }) : super(key: key);
@@ -43,6 +45,8 @@ class _FoodtileState extends State<Foodtile> {
 
   @override
   Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return GestureDetector(
       onTap: widget.press,
       child: Container(
@@ -52,8 +56,12 @@ class _FoodtileState extends State<Foodtile> {
           color: widget.color[200],
         ),
 
-        width: 250,
-        height: 270,
+        width: Responsive.isDesktop(context)
+            ? width * 0.4
+            : Responsive.isTablet(context)
+            ? width * 0.4
+            : width < 552 ? width * 0.85 : width * 0.7,
+        height: 100,
 
         // child:CheckboxListTile(
         //   title: Text("Ahmed"),
@@ -95,7 +103,7 @@ class _FoodtileState extends State<Foodtile> {
                 ),
                 child: SizedBox(
                   height: double.infinity,
-                  width: 50,
+                  width: widget.isuser.isNotEmpty? 50:80,
 
                 ),
               ),
@@ -103,12 +111,17 @@ class _FoodtileState extends State<Foodtile> {
 
 
             Text(widget.title,
+                maxLines: null,
+                softWrap: true,
                 style: GoogleFonts.openSans(
                     color: Color(0xFF022323),
-                    fontSize: 13, fontWeight:  FontWeight.w400)
+                    fontSize: 13, fontWeight:  FontWeight.w400,
+
+                )
             ),
 
             Spacer(),
+            if(widget.isuser.isNotEmpty)
             Checkbox(
               // checkColor: Colors.white,
               // fillColor: MaterialStateProperty.resolveWith(getColor),

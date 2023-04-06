@@ -8,7 +8,7 @@ class Chart extends StatelessWidget {
     Key? key,
     required this.total,
   }) : super(key: key);
-  double total;
+  int total;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -29,14 +29,21 @@ class Chart extends StatelessWidget {
               children: [
                 SizedBox(height: defaultPadding),
                 Text(
-                  total.toString(),
+                  total.toString() ,
                   style: Theme.of(context).textTheme.headline4!.copyWith(
                     color: Colors.black,
                     fontWeight: FontWeight.w600,
                     height: 0.5,
                   ),
                 ),
-            //    Text("of 128GB")
+
+               Text("Calories",
+                 style: Theme.of(context).textTheme.headline4!.copyWith(
+                 color: Colors.black,
+                 fontWeight: FontWeight.w300,
+                 fontSize: 15
+               ),
+               )
               ],
             ),
           ),
@@ -50,7 +57,7 @@ List<PieChartSectionData> paiChartSelectionDatas = [
 
 
   PieChartSectionData(
-    color: primaryColor,
+    color:Color(0xFF043838),
     value: 100,
     showTitle: false,
     radius: 13,

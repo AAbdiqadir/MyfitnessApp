@@ -1,6 +1,6 @@
 
 class Ingredient {
-  List <String>  products;
+  List<dynamic>  products;
   String id;
 
   Ingredient({

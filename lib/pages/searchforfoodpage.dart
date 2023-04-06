@@ -25,7 +25,7 @@ class food extends StatelessWidget {
 
         appBar:! Responsive.isDesktop(context) ? PreferredSize(
             preferredSize: Size(double.infinity, 80),
-            child:headers()
+            child:headers( title: "Groceries",)
 
         ): null,
         drawer: DrawerPage(),
@@ -59,7 +59,7 @@ class food extends StatelessWidget {
 
 
 
-        bottomNavigationBar: Responsive.isMobile(context)? navbar(): null,
+        //bottomNavigationBar: Responsive.isMobile(context)? navbar(): null,
 
 
       ),

@@ -59,7 +59,7 @@ class Fooddetailpage2State extends State<Fooddetailpage2> {
 
       ): null,
       body: SingleChildScrollView(child: Container(
-          height: height * 1.4,
+          height: widget.product.type == "Recipe" ? height * 2.5:height * 1.4,
           child: fooddetails(Productdetail: widget.product,)))
     );
   }

@@ -49,9 +49,9 @@ class _dashboardsState extends State<dashboards> {
 
 
 
-  List <String> foods= ['Vegetables', "Animal products","Fruits","Fats", "Carbohydrates"];
+  List <String> foods= ['Chest', "Back","Shoulder","Legs", "Arms"];
 
-  String? SelectedOption = "Vegetables";
+  String? SelectedOption = "Chest";
 
   @override
   void initState() {

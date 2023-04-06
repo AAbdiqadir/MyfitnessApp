@@ -77,21 +77,21 @@ class totalnutrientsState extends State<totalnutrients> {
                       InfoCard(
                         image: "images/avocado.png",
                         title: "Protein",
-                        total: "${double.parse((widget.proteincont).toStringAsFixed(2))*100}%",
+                        total: "${double.parse((widget.proteincont *100).toStringAsFixed(1))}%",
                         percent: double.parse((widget.proteincont).toStringAsFixed(2)),
                       ),
                       InfoCard(
                         image: "images/avocado.png",
                         title: "Fat",
-                        total: "${double.parse((widget.carbcont).toStringAsFixed(2))*100}%",
+                        total: "${double.parse((widget.fatcont *100).toStringAsFixed(1))}%",
 
-                        percent: double.parse((widget.carbcont).toStringAsFixed(2)),
+                        percent: double.parse((widget.fatcont).toStringAsFixed(1)),
                       ),
                       InfoCard(
                         image: "images/avocado.png",
                         title: "Carbs",
-                        total: "${double.parse((widget.fatcont).toStringAsFixed(2))*100}%" ,
-                        percent: double.parse((widget.fatcont).toStringAsFixed(2)),
+                        total: "${double.parse((widget.carbcont *100).toStringAsFixed(1))}%" ,
+                        percent: double.parse((widget.carbcont).toStringAsFixed(2)),
                       ),
 
 

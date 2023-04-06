@@ -39,7 +39,12 @@ class exercisedetailsState extends State<exercisedetails> {
 
       child: Column(
         children: [
-
+          Text("Bench press",
+            style: GoogleFonts.openSans(
+              fontSize: 20.0,
+              fontWeight: FontWeight.w700,
+              color: AppColorss.textColor,),
+          ),
           Expanded(
             flex: 2,
             child: Container(
@@ -65,13 +70,8 @@ class exercisedetailsState extends State<exercisedetails> {
 
 
                           children: [
-                            SizedBox(height: height * 0.064),
-                            Text("Bench press",
-                              style: GoogleFonts.openSans(
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.w700,
-                                color: AppColorss.textColor,),
-                            ),
+                           // SizedBox(height: height * 0.064),
+
                             SizedBox(height: height * 0.014),
                             Text("Exercise anatomy",
                               style: GoogleFonts.openSans(
@@ -79,7 +79,7 @@ class exercisedetailsState extends State<exercisedetails> {
                                 fontWeight: FontWeight.w700,
                                 color: AppColorss.textColor,),
                             ),
-                            SizedBox(height: height * 0.014),
+
                             SizedBox(
                               height: height *0.3,
                               width: width *0.3,

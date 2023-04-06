@@ -119,7 +119,7 @@ class CartModel extends ChangeNotifier {
   Future<void> addfood(Product products, String DocID) {
     final FirebaseAuth auth = FirebaseAuth.instance;
     final  user = FirebaseAuth.instance.currentUser;
-    final uid = user?.uid;
+    final uid = user?.email;
     CollectionReference docs = FirebaseFirestore.instance.collection('fooddetails');
 
     final document = docs.doc(DocID);
@@ -149,13 +149,13 @@ class CartModel extends ChangeNotifier {
     }
 
   }
-  List<Ingredient>  ingredient =[];
-  List<Ingredient> get prodingredient => ingredient;
+  List<Ingredient>  myingredient =[];
+  List<Ingredient> get prodingredient => myingredient;
   Future<void> ingredientid( ) async {
     final snapshot = await FirebaseFirestore.instance.collection('recipeingredients').get();
     //final document = users.doc(DocID);
     final list = snapshot.docs.map((doc) => Ingredient.fromSnapshot(doc)).toList();
-    ingredient = list;
+    myingredient = list;
 
     notifyListeners();
   }

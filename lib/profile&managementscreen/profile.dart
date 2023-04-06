@@ -51,6 +51,8 @@ class _userprofileState extends State<userprofile> {
   }
 
 
+
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery
@@ -210,7 +212,18 @@ class _userprofileState extends State<userprofile> {
                                   //FirebaseAuth.instance.signOut();
                                 },
                               ),
+                              SizedBox(
+                                height: height*0.02,
+                              ),
 
+                              cardinfo(
+
+                                signout: "Sign out",
+                                ontap: (){
+                                  //imagepicked();
+                                  FirebaseAuth.instance.signOut();
+                                },
+                              ),
                               SizedBox(
                                 height: height*0.02,
                               ),

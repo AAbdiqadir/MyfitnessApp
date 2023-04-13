@@ -26,6 +26,7 @@ import 'package:myfitnessapp/screens/searchscreen/details.dart';
 import 'package:myfitnessapp/screens/workoutdetailscreen/video.dart';
 import 'package:myfitnessapp/sidemenucontroller.dart';
 import 'package:myfitnessapp/testr.dart';
+import 'package:myfitnessapp/userprofile/pages/profile_page.dart';
 import 'package:provider/provider.dart';
 
 import 'datatesting.dart';
@@ -66,16 +67,32 @@ class MyApp extends StatelessWidget {
     textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme)
         .apply(bodyColor: Colors.white),
     canvasColor: Colors.grey[200],
+        elevatedButtonTheme: ElevatedButtonThemeData(
+            style: ElevatedButton.styleFrom(
+                primary: Colors.black,
+                shadowColor: Colors.grey,
+                elevation: 20,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(0.0))))),
+        inputDecorationTheme: InputDecorationTheme(
+            border:
+            OutlineInputBorder(borderRadius: BorderRadius.circular(0.0))),
+        textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(
+            alignment: Alignment.centerLeft,
+            primary: Colors.black,
+          ),
+        )
     ),
 
     home: StreamBuilder<User?>(
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context,snapshot){
         if(snapshot.hasData){
-          return MealScreen();
+          return Homepage();
         }
         else{
-          return intropage();
+          return LoginScreen();
         }
 
       },

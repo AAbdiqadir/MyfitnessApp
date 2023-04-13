@@ -25,9 +25,9 @@ class Workouts extends StatelessWidget {
 
        // key: context.read<MenuAppController>().scaffoldKey,
 
-        appBar:! Responsive.isDesktop(context) ? PreferredSize(
+        appBar:! Responsive.isDesktop(context) ? const PreferredSize(
             preferredSize: Size(double.infinity, 80),
-            child:headers()
+            child:headers(title: "Exercise",)
 
         ): null,
         // appBar: AppBar(

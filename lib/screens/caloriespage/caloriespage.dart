@@ -131,42 +131,42 @@ class _caloriespageState extends State<caloriespage> {
                           headers(color: Colors.grey[200],),
 
 
-                          // Row(
-                          //   children: [
-                          //     Expanded(child: monthly()),
-                          //
-                          //
-                          //   ],
-                          // )
-                          // ,
+                          Row(
+                            children: [
+                              Expanded(child: monthly()),
 
 
-                          // SizedBox(
-                          //   width: Responsive.isDesktop(context)? _size.width *0.6: Responsive.isTablet(context)? _size.width *0.7: Responsive.isMobile(context)&& _size.width > 654? _size.width *0.9
-                          //       :_size.width > 500 ? _size.width *0.7:_size.width *0.9,
-                          //   child: Column(
-                          //     mainAxisAlignment: MainAxisAlignment.center,
-                          //     children: [
-                          //       Row(
-                          //         crossAxisAlignment: CrossAxisAlignment.start,
-                          //         children: [
-                          //
-                          //           Expanded(child: calchart()),
-                          //           if(_size.width > 654)
-                          //           Expanded(child: caltodqqq(
-                          //             carbcont: 30.1,proteincont: 30.9,fatcont: 50.8,
-                          //           )),
-                          //
-                          //
-                          //         ],
-                          //       ),
-                          //       if(_size.width < 654)
-                          //         caltodqqq(carbcont: 30.1,proteincont: 30.9,fatcont: 50.8,),
-                          //
-                          //
-                          //     ],
-                          //   ),
-                          // ),
+                            ],
+                          )
+                          ,
+
+
+                          SizedBox(
+                            width: Responsive.isDesktop(context)? _size.width *0.6: Responsive.isTablet(context)? _size.width *0.7: Responsive.isMobile(context)&& _size.width > 654? _size.width *0.9
+                                :_size.width > 500 ? _size.width *0.7:_size.width *0.9,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+
+                                    Expanded(child: calchart()),
+                                    if(_size.width > 654)
+                                    Expanded(child: caltodqqq(
+                                      carbcont: 30.1,proteincont: 30.9,fatcont: 50.8,
+                                    )),
+
+
+                                  ],
+                                ),
+                                if(_size.width < 654)
+                                  caltodqqq(carbcont: 30.1,proteincont: 30.9,fatcont: 50.8,),
+
+
+                              ],
+                            ),
+                          ),
 
                           SizedBox(
                             height: 20,

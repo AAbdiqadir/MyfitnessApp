@@ -81,7 +81,7 @@ class _dashboardsState extends State<dashboards> {
                   SizedBox(
 
                       height: MediaQuery.of(context).size.height * 0.10,
-                      child: headers()),
+                      child: headers(title: "Exercise",)),
 
 
 
@@ -94,7 +94,7 @@ class _dashboardsState extends State<dashboards> {
 
 
                       Expanded(
-                          flex: 3,
+                          flex: 2,
                           child:Column(
 
 
@@ -227,7 +227,7 @@ class _dashboardsState extends State<dashboards> {
                                     onPressed: (){
                                       setState(() {
                                         checkedIndex = index;
-
+                                        if(Responsive.isMobile(context))
                                         Navigator.of(context).push(MaterialPageRoute(builder: (context) => exercisedescription(
                                           Exercises: exercises[index][2],
                                         )));
@@ -254,13 +254,18 @@ class _dashboardsState extends State<dashboards> {
                       ),
 
                       if(_size.width > 736)
-                      Expanded(
-                          flex: 5,
+                      Expanded(flex: 2,
 
+                        //child: Container(),
 
-                        child:exercisedescription(
-                          Exercises: exercises[0][2],
-                        ),
+                         child: Column(
+                           children: [
+                             SizedBox(
+                               height: 50,
+                             ),
+                             exercisedetails(video:"calpage/pexels-tima-miroshnichenko-6388436.mp4",),
+                           ],
+                         )
 
                       )
 

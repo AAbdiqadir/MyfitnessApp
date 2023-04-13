@@ -13,6 +13,7 @@ import 'package:myfitnessapp/profile&managementscreen/profile.dart';
 import 'package:myfitnessapp/responsive_design.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:myfitnessapp/screens/caloriespage/constants.dart';
+import 'package:myfitnessapp/screens/caloriespage/mealplan.dart';
 import 'package:myfitnessapp/screens/dashboard/workouts.dart';
 import 'package:myfitnessapp/screens/foods/fooddescriptionpage.dart';
 import 'package:myfitnessapp/screens/foods/fooddescriptionpage2.dart';
@@ -71,7 +72,7 @@ class MyApp extends StatelessWidget {
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context,snapshot){
         if(snapshot.hasData){
-          return Homepage();
+          return MealScreen();
         }
         else{
           return intropage();

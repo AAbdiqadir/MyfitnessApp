@@ -46,10 +46,10 @@ class exercisedetailsState extends State<exercisedetails> {
               color: AppColorss.textColor,),
           ),
           Expanded(
-            flex: 2,
+            flex: 1,
             child: Container(
               width: double.infinity,
-              // height: height * 0.4,
+              height: height * 0.1,
 
               child: videoplayer(
                 video: widget.video,
@@ -82,22 +82,29 @@ class exercisedetailsState extends State<exercisedetails> {
 
                             SizedBox(
                               height: height *0.3,
-                              width: width *0.3,
+                              width: double.infinity,
                               child: Image.asset("calpage/bench press.jpg",
-                                fit: BoxFit.fitWidth,
+                                fit: BoxFit.cover,
                                 height: height *0.2,
 
                               ),
                             ),
-                            SizedBox(height: height * 0.064),
+                            //SizedBox(height: height * 0.064),
                             Text("Description",
                               style: GoogleFonts.openSans(
                                 fontSize: 15.0,
                                 fontWeight: FontWeight.w700,
                                 color: AppColorss.textColor,),
                             ),
-                            SizedBox(height: height * 0.064),
-                            Text( "widget.Exercises.Description",
+                           // SizedBox(height: height * 0.064),
+                            Text( "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Aliquam vestibulum morbi blandit cursus"
+                                " risus at. Amet risus nullam eget felis eget nunc. Imperdiet dui accumsan sit amet nulla facilisi morbi tempus. Congue nisi vitae suscipit tellus"
+                                " mauris a diam. Molestie a iaculis at erat pellentesque. At tempor commodo ullamcorper a lacus vestibulum sed arcu. Convallis aenean et "
+                                "tortor at risus viverra adipiscing at in. Faucibus pulvinar elementum integer enim. Aenean vel elit scelerisque mauris pellentesque pulvinar"
+                                " pellentesque habitant morbi. Ante in nibh mauris cursus mattis molestie a. Felis bibendum ut tristique et egestas quis ipsum suspendisse."
+                                "Sed sed risus pretium quam vulputate dignissim suspendisse in est. Sed libero enim sed faucibus turpis. Leo vel orci porta non."
+                                " Sem nulla pharetra diam sit. Amet purus gravida quis blandit turpis cursus in hac. Ipsum dolor sit amet consectetur adipiscing elit ut."
+                                "Volutpat consequat mauris nunc congue nisi vitae suscipit tellus mauris. Leo a diam sollicitudin tempor.",
                               style: GoogleFonts.openSans(
                                 fontSize: 13.0,
                                 fontWeight: FontWeight.w500,

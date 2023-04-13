@@ -18,35 +18,37 @@ class exercisedescription extends StatefulWidget {
 class _exercisedescriptionState extends State<exercisedescription> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor:  Colors.grey[300],
-      appBar: Responsive.isMobile(context)? PreferredSize(
-        preferredSize: Size(double.infinity, 100),
-        child: Padding(
-          padding:  EdgeInsets.symmetric(vertical: 25.0),
-          child: Column(
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor:  Colors.grey[300],
+        appBar: Responsive.isMobile(context)? PreferredSize(
+          preferredSize: Size(double.infinity, 50),
+          child: Padding(
+            padding:  EdgeInsets.symmetric(vertical: 0.0),
+            child: Column(
 
-            children: [
-              Container(
-                color:  !Responsive.isMobile(context)? Colors.transparent: Colors.grey[300],
+              children: [
+                Container(
+                  color:  !Responsive.isMobile(context)? Colors.transparent: Colors.grey[300],
 
-                child:
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 10,
-                    ),
-                    IconButton( onPressed: () {  Get.back(
-                    );
-                      }, icon: Icon(Icons.arrow_back,
-                        color: Responsive.isMobile(context)? Colors.black: Colors.grey[300]),)
-                  ],
+                  child:
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 10,
+                      ),
+                      IconButton( onPressed: () {  Get.back(
+                      );
+                        }, icon: Icon(Icons.arrow_back,
+                          color: Responsive.isMobile(context)? Colors.black: Colors.grey[300]),)
+                    ],
+                  ),
                 ),
-              ),
-            ],
-          ),
-        ),): null,
-      body: SingleChildScrollView(child: exercisedetails(video: widget.Exercises,)),
+              ],
+            ),
+          ),): null,
+        body: SingleChildScrollView(child: exercisedetails(video: widget.Exercises,)),
+      ),
     );
   }
 }

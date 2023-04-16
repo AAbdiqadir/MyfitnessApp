@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:string_validator/string_validator.dart';
 
+import '../user/user.dart';
 import '../user/user_data.dart';
 import '../widgets/appbar_widget.dart';
 
@@ -17,7 +18,7 @@ class EditPhoneFormPage extends StatefulWidget {
 class EditPhoneFormPageState extends State<EditPhoneFormPage> {
   final _formKey = GlobalKey<FormState>();
   final phoneController = TextEditingController();
-  var user = UserData.myUser;
+  Users user = UserData.current;
 
   @override
   void dispose() {

@@ -279,6 +279,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       ],
                                     ),
                                     textfields(
+                                        key: const ValueKey('Email'),
                                         field: "Email", vontroller: emailController,
                                         obsecure: false,
                                         onvalidate: (value) {
@@ -290,6 +291,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ),
                                     SizedBox(height: height * 0.014),
                                     textfields(
+                                      key: const ValueKey('Password'),
                                       field: "Password", vontroller: password,
                                       obsecure: true,
                                       onvalidate: (value) {
@@ -317,6 +319,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           child: Align(
                                             alignment: Alignment.bottomRight,
                                             child: TextButton(
+                                              key: const ValueKey('Forgot Password'),
                                               onPressed: () {
                                                 Get.to(() => forgotpassword(),
                                                   arguments: "login",
@@ -324,6 +327,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                 );
                                               },
                                               child: Text('Forgot Password?',
+
                                                 style: openSans.copyWith(
                                                   fontSize: 15.0,
                                                   color: AppColorss.mainBlueColor,
@@ -342,6 +346,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         InkWell(
+                                          key: const ValueKey('Sign in'),
                                           onTap: () {
                                             if (formkey.currentState!.validate() &&
                                                 EmailValidator.validate(

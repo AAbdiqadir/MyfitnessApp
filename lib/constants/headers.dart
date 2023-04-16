@@ -6,17 +6,20 @@ import 'package:provider/provider.dart';
 
 import '../profile&managementscreen/profile.dart';
 import '../sidemenucontroller.dart';
+import '../userprofile/signout.dart';
 
 class headers extends StatelessWidget {
 
   const headers({Key? key,
     this.color = colors,
-
+    required this.name ,
   this.title = "Dashboard"}) : super(key: key);
 
 
 
   final title;
+
+  final name;
   final  color;
 
   @override
@@ -71,7 +74,7 @@ class headers extends StatelessWidget {
 
               InkWell(
                 onTap: (){
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => userprofile()));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => signout()));
                 },
                 child: Container(
                   height: double.infinity,
@@ -97,7 +100,7 @@ class headers extends StatelessWidget {
                       Padding(
                         padding:
                         const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
-                        child: Text("Ahmed",
+                        child: Text(name,
                         style: GoogleFonts.openSans(
                         color: Color(0xFF022323),
                         fontSize: 15, fontWeight:  FontWeight.w300),

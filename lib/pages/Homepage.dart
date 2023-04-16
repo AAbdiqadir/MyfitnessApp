@@ -16,6 +16,7 @@ import '../screens/caloriespage/responive.dart';
 import '../screens/dashboard/dashboard.dart';
 import '../sidemenucontroller.dart';
 import '../tiles/productfittile.dart';
+import '../userprofile/user/user_data.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({Key? key}) : super(key: key);
@@ -36,6 +37,13 @@ class _HomepageState extends State<Homepage> {
     ["Water", "1.00", "images/water.png", Colors.blue],
   ];
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    UserData().fetchuser();
+    super.initState();
+  }
+
   void main(){
 
     print(_shopItems.length);
@@ -54,7 +62,7 @@ class _HomepageState extends State<Homepage> {
 
           appBar:! Responsive.isDesktop(context) ? PreferredSize(
             preferredSize: Size(double.infinity, 80),
-        child:headers()
+        child:headers(name: UserData.current.name,)
 
           ): null,
 

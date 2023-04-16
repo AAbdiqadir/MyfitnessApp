@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants.dart';
@@ -11,6 +12,7 @@ class textfields extends StatelessWidget {
      required this.obsecure,
      this.onvalidate
   }) : super(key: key);
+
 
   final String field;
   final TextEditingController vontroller;
@@ -52,6 +54,7 @@ class textfields extends StatelessWidget {
                   color: AppColorss.blueDarkColor,
                   //fontSize: 12.0,
                 ),
+                key: const Key('counter'),
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 validator:onvalidate ,
                 obscureText:obsecure,

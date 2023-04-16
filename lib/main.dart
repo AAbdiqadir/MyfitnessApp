@@ -92,7 +92,7 @@ class MyApp extends StatelessWidget {
           return Homepage();
         }
         else{
-          return LoginScreen();
+          return intropage();
         }
 
       },

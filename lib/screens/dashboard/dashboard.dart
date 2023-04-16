@@ -8,6 +8,7 @@ import 'package:myfitnessapp/screens/dashboard/workouts.dart';
 import 'package:provider/provider.dart';
 
 import '../../model/data.dart';
+import '../../userprofile/user/user_data.dart';
 import 'chart.dart';
 import '../caloriespage/chartcard.dart';
 import '../../responsive_design.dart';
@@ -48,6 +49,9 @@ class _dashboardState extends State<dashboard> {
       Provider.of<CartModel>(context, listen: false).ingredientid();
 
 
+
+
+
     super.initState();
 
   }
@@ -69,7 +73,7 @@ class _dashboardState extends State<dashboard> {
               SizedBox(
 
                   height: MediaQuery.of(context).size.height * 0.1,
-                  child: headers()),
+                  child: headers(name: UserData.current.name,)),
 
                  SizedBox(
                    height:20,

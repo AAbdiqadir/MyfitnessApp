@@ -7,10 +7,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:myfitnessapp/screens/intropage/intropage.dart';
 
+import '../userprofile/user/user.dart';
 import 'dailytrack.dart';
 import 'exercises.dart';
 import 'ingredients.dart';
-
+import 'package:get/get.dart';
 
 
 class CartModel extends ChangeNotifier {
@@ -86,8 +87,14 @@ class CartModel extends ChangeNotifier {
     CollectionReference users = FirebaseFirestore.instance.collection('cart');
     final json = daily.toJon();
     return users.doc(uid).collection("meals").doc(docid).set(json)
-        .then((value) => print("User Added"))
-        .catchError((error) => print("Failed to add user: $error"));
+        .whenComplete(() => Get.snackbar(
+        "Success", "You have added food successfully",
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red.withOpacity(0.1)
+    )).catchError((error,stackTrace){
+      Get.snackbar(
+          "Error", "Something went wrong try again");
+    });
   }
 
   Future<void> addworkout(exercises workouts) {
@@ -128,10 +135,14 @@ class CartModel extends ChangeNotifier {
 
     // Call the user's CollectionReference to add a new user
     final json = products.toJon();
-    return document.set(json)
-        .then((value) => print("food Added"),
-    )
-        .catchError((error) => print("Failed to add user: $error"));
+    return document.set(json).whenComplete(() => Get.snackbar(
+    "Success", "You have added food successfully",
+    snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: Colors.red.withOpacity(0.1)
+    )).catchError((error,stackTrace){
+      Get.snackbar(
+          "Success", "You have added food successfully");
+    });
   }
   List<dailytrack> _meals = [];
 
@@ -184,7 +195,7 @@ class CartModel extends ChangeNotifier {
   }
   List <exercises> _workouts = [];
   List <exercises> get workouts=> _workouts;
-  Future<void> fetchProducts( ) async {
+  Future<void> fetchProducts() async {
     final snapshot = await FirebaseFirestore.instance.collection('fooddetails').get();
     //final document = users.doc(DocID);
     final products = snapshot.docs.map((doc) => Product.fromSnapshot(doc)).toList();
@@ -194,7 +205,21 @@ class CartModel extends ChangeNotifier {
 
 
   List<dailytrack> get meals => _meals;
+  late Users _current ;
 
+  Users get current => _current;
+
+  Future<void> fetchuser() async {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final  user = FirebaseAuth.instance.currentUser;
+    final uid = user?.uid;
+    final snapshot = await FirebaseFirestore.instance.collection('users').doc(uid).get();
+    //final document = users.doc(DocID);
+    final document = Users.fromSnapshot(snapshot);
+
+    _current = document;
+    notifyListeners();
+  }
 
 
   Future<void> deleteField(String DOCID) {

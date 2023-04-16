@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../../model/data.dart';
+import '../user/user.dart';
 import '../user/user_data.dart';
 import '../widgets/appbar_widget.dart';
-
+import 'package:provider/provider.dart';
 
 // This class handles the Page to edit the About Me Section of the User Profile.
 class EditDescriptionFormPage extends StatefulWidget {
@@ -14,7 +16,7 @@ class EditDescriptionFormPage extends StatefulWidget {
 class _EditDescriptionFormPageState extends State<EditDescriptionFormPage> {
   final _formKey = GlobalKey<FormState>();
   final descriptionController = TextEditingController();
-  var user = UserData.myUser;
+  var user = UserData.current;
 
   @override
   void dispose() {

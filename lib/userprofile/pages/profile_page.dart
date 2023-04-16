@@ -1,7 +1,9 @@
 import 'dart:async';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../../screens/profilescreen/cardinfotile.dart';
 import '../user/user.dart';
 import '../widgets/display_image_widget.dart';
 import '../user/user_data.dart';
@@ -15,52 +17,76 @@ import 'edit_phone.dart';
 class ProfilePage extends StatefulWidget {
   @override
   _ProfilePageState createState() => _ProfilePageState();
+
 }
 
+
+
 class _ProfilePageState extends State<ProfilePage> {
+
+  @override
+  void initState() {
+    // TODO: implement initState
+
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
-    final user = UserData.myUser;
+    Users user = UserData.current;
 
     return Scaffold(
-      body: Column(
-        children: [
-          AppBar(
-            iconTheme: IconThemeData(
-                color: Colors
-                    .black), // set backbutton color here which will reflect in all screens.
-            leading: BackButton(),
-            backgroundColor: Colors.transparent,
-            elevation: 0,
+      appBar:AppBar(
+        iconTheme: IconThemeData(
+            color: Colors
+                .black), // set backbutton color here which will reflect in all screens.
+        leading: BackButton(),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
 
-          ),
-          Center(
-              child: Padding(
-                  padding: EdgeInsets.only(bottom: 20),
-                  child: Text(
-                    'Edit Profile',
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.w700,
-                      color: Color.fromRGBO(64, 105, 225, 1),
-                    ),
-                  ))),
-          InkWell(
-              onTap: () {
-                navigateSecondPage(EditImagePage());
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+
+          children: [
+
+            Center(
+                child: Padding(
+                    padding: EdgeInsets.only(bottom: 20),
+                    child: Text(
+                      'Edit Profile',
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.w700,
+                        color: Color.fromRGBO(64, 105, 225, 1),
+                      ),
+                    ))),
+            InkWell(
+                onTap: () {
+                  navigateSecondPage(EditImagePage());
+                },
+                child: DisplayImage(
+                  imagePath: UserData.image,
+                  onPressed: () {},
+                )),
+            buildUserInfoDisplay(user.name, 'Name', EditNameFormPage()),
+            buildUserInfoDisplay(user.phone, 'Phone', EditPhoneFormPage()),
+            buildUserInfoDisplay(user.email, 'Email', EditEmailFormPage()),
+
+            // Expanded(
+            //   child: buildAbout(user),
+            //   flex: 4,
+            //  ),
+            cardinfo(
+
+              signout: "Sign out",
+              ontap: (){
+                //imagepicked();
+                FirebaseAuth.instance.signOut();
               },
-              child: DisplayImage(
-                imagePath: user.image,
-                onPressed: () {},
-              )),
-          buildUserInfoDisplay(user.name, 'Name', EditNameFormPage()),
-          buildUserInfoDisplay(user.phone, 'Phone', EditPhoneFormPage()),
-          buildUserInfoDisplay(user.email, 'Email', EditEmailFormPage()),
-          Expanded(
-            child: buildAbout(user),
-            flex: 4,
-          )
-        ],
+            ),
+
+          ],
+        ),
       ),
     );
   }
@@ -116,7 +142,7 @@ class _ProfilePageState extends State<ProfilePage> {
           ));
 
   // Widget builds the About Me Section
-  Widget buildAbout(User user) => Padding(
+  Widget buildAbout(Users user) => Padding(
       padding: EdgeInsets.only(bottom: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

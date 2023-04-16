@@ -13,6 +13,8 @@ import 'caloriespage.dart';
 import 'constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'mealplan.dart';
+
 
 class ButtonsInfo {
   String title;
@@ -31,7 +33,7 @@ List<ButtonsInfo> _buttonNames = [
   ButtonsInfo(title: "Home", icon: FontAwesomeIcons.house, page: Homepage()),
   ButtonsInfo(title: "Food", icon: FontAwesomeIcons.utensils ,page: food()),
   ButtonsInfo(title: "Exercise", icon: FontAwesomeIcons.dumbbell,page: Workouts()),
-  ButtonsInfo(title: "Plan", icon: FontAwesomeIcons.nutritionix, page: caloriespage()),
+  ButtonsInfo(title: "Meal Plan", icon: FontAwesomeIcons.nutritionix, page: MealScreen()),
   ButtonsInfo(title: "Addfood", icon: FontAwesomeIcons.squarePlus, page:foodform())
 ];
 

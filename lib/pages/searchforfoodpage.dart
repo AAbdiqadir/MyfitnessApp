@@ -9,7 +9,7 @@ import '../screens/caloriespage/drawer.dart';
 import '../screens/caloriespage/responive.dart';
 import '../screens/foods/dashboard.dart';
 import '../sidemenucontroller.dart';
-
+import '../userprofile/user/user_data.dart';
 class food extends StatelessWidget {
   const food({Key? key}) : super(key: key);
 
@@ -25,7 +25,7 @@ class food extends StatelessWidget {
 
         appBar:! Responsive.isDesktop(context) ? PreferredSize(
             preferredSize: Size(double.infinity, 80),
-            child:headers( title: "Groceries",)
+            child:headers( title: "Groceries",name :UserData.current.name)
 
         ): null,
         drawer: DrawerPage(),

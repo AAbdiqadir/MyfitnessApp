@@ -16,6 +16,7 @@ import '../../model/exercises.dart';
 import '../../model/exercises.dart';
 import '../../model/exercises.dart';
 import '../../responsive_design.dart';
+import '../../userprofile/user/user_data.dart';
 import '../workoutdetailscreen/video.dart';
 import 'exercisedescription.dart';
 import 'exercisedescriptionpage.dart';
@@ -81,7 +82,7 @@ class _dashboardsState extends State<dashboards> {
                   SizedBox(
 
                       height: MediaQuery.of(context).size.height * 0.10,
-                      child: headers(title: "Exercise",)),
+                      child: headers(title: "Exercise",name : UserData.current.name)),
 
 
 

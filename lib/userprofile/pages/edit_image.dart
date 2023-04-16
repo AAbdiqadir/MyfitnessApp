@@ -7,6 +7,7 @@ import 'package:path/path.dart';
 
 import 'package:image_picker/image_picker.dart';
 
+import '../user/user.dart';
 import '../user/user_data.dart';
 import '../widgets/appbar_widget.dart';
 
@@ -18,7 +19,10 @@ class EditImagePage extends StatefulWidget {
 }
 
 class _EditImagePageState extends State<EditImagePage> {
-  var user = UserData.myUser;
+  Users user = UserData.current;
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -54,9 +58,9 @@ class _EditImagePageState extends State<EditImagePage> {
                       final newImage =
                           await File(image.path).copy(imageFile.path);
                       setState(
-                          () => user = user.copy(imagePath: newImage.path));
+                          () =>  UserData.image = newImage.path);
                     },
-                    child: Image.network(user.image),
+                    child: Image.network(UserData.image),
                   ))),
           Padding(
               padding: EdgeInsets.only(top: 40),

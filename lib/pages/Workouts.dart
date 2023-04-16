@@ -12,10 +12,15 @@ import '../responsive_design.dart';
 import '../screens/dashboard/dashboard.dart';
 import '../screens/searchscreen/searchpage.dart';
 import '../sidemenucontroller.dart';
-
-class Workouts extends StatelessWidget {
+import '../userprofile/user/user_data.dart';
+class Workouts extends StatefulWidget {
   const Workouts({Key? key}) : super(key: key);
 
+  @override
+  State<Workouts> createState() => _WorkoutsState();
+}
+
+class _WorkoutsState extends State<Workouts> {
   @override
   Widget build(BuildContext context) {
     final Size _size = MediaQuery.of(context).size;
@@ -25,10 +30,10 @@ class Workouts extends StatelessWidget {
 
        // key: context.read<MenuAppController>().scaffoldKey,
 
-        appBar:! Responsive.isDesktop(context) ? const PreferredSize(
-            preferredSize: Size(double.infinity, 80),
-            child:headers(title: "Exercise",)
-
+        appBar:! Responsive.isDesktop(context) ?  PreferredSize(
+            preferredSize: const Size(double.infinity, 80),
+            // child:headers(title: "Exercise", name : )
+            child:headers( title: "Exercise", name : UserData.current.name)
         ): null,
         // appBar: AppBar(
         //

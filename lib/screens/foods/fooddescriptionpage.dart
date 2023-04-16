@@ -540,29 +540,29 @@ class fooddetailsState extends State<fooddetails> {
                                   onTap: () {
 
 
-                                    print("carb " +carbcont.toString());
-                                    print("Protein " +proteincont.toString());
-                                    print("Fat " +fatcont.toString());
+                                    // print("carb " +carbcont.toString());
+                                    // print("Protein " +proteincont.toString());
+                                    // print("Fat " +fatcont.toString());
                                    // print("carb " +carbcont.toString());
 
                                    // print(ingredient.products.length);
-                                   //  DateTime now = DateTime.now();
-                                   //
-                                   //  String s = DateFormat('yyyy-MM-dd').format(now);
-                                   //  print(s);
-                                   //
-                                   //  var uuid = Uuid();
-                                   //
-                                   //  String DOCID = uuid.v4();
-                                   //  dailytrack daily = dailytrack(
-                                   //      meal: SelectedOption.toString(),
-                                   //      noofServings: selectedvalue.toString(),
-                                   //      dateTime: s,
-                                   //      id: DOCID,
-                                   //      Productid: widget.Productdetail.FoodID);
-                                   //
-                                   //  Provider.of<CartModel>(context, listen: false)
-                                   //      .addmeal(daily, DOCID);
+                                    DateTime now = DateTime.now();
+
+                                    String s = DateFormat('yyyy-MM-dd').format(now);
+                                    print(s);
+
+                                    var uuid = Uuid();
+
+                                    String DOCID = uuid.v4();
+                                    dailytrack daily = dailytrack(
+                                        meal: SelectedOption.toString(),
+                                        noofServings: selectedvalue.toString(),
+                                        dateTime: s,
+                                        id: DOCID,
+                                        Productid: widget.Productdetail.FoodID);
+
+                                    Provider.of<CartModel>(context, listen: false)
+                                        .addmeal(daily, DOCID);
                                   },
                                   child: Container(
                                     width: Responsive.isDesktop(context) ? width *

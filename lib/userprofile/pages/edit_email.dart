@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:email_validator/email_validator.dart';
 
+import '../user/user.dart';
 import '../user/user_data.dart';
 import '../widgets/appbar_widget.dart';
 
@@ -18,7 +19,7 @@ class EditEmailFormPage extends StatefulWidget {
 class EditEmailFormPageState extends State<EditEmailFormPage> {
   final _formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
-  var user = UserData.myUser;
+  Users user = UserData.current;
 
   @override
   void dispose() {

@@ -67,7 +67,7 @@ class _dashboardssState extends State<dashboardss> {
     return Scaffold(
 
 
-      floatingActionButton: addrecipes.isNotEmpty && user.toString() == "admin@gmail.com" ? Row(
+      floatingActionButton: addrecipes.isNotEmpty && user.toString() == "test@gmail.com" ? Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
            Text('Add recipes',
@@ -102,7 +102,7 @@ class _dashboardssState extends State<dashboardss> {
                       .of(context)
                       .size
                       .height * 0.10,
-                  child: headers(name : UserData.current.name)),
+                  child: headers()),
        // Consumer<CartModel>(
 
       //   builder: (context, value, child) {
@@ -251,7 +251,7 @@ class _dashboardssState extends State<dashboardss> {
                                                 (context,index)
                                             {
                                               final item = ahmed[index];
-                                              return  Dismissible(
+                                              return  user.toString() == "test@gmail.com"  ?Dismissible(
                                                 background: Container(color: Colors.red),
                                                 key: UniqueKey(),
                                                 // Provide a function that tells the app
@@ -261,12 +261,13 @@ class _dashboardssState extends State<dashboardss> {
                                                   // Remove the item from the data source.
                                                   setState(() {
                                                     value.products.remove(ahmed[index]);
+                                                    FirebaseFirestore.instance.collection("fooddetails").doc(ahmed[index].FoodID).delete();
                                                   });
 
                                                   // Then show a snackbar.
                                                   ScaffoldMessenger.of(context)
                                                       .showSnackBar(SnackBar(content: Text("${item.name}Dismissed")));
-                                                },
+                                                } ,
                                                 child: Foodtile(
 
                                                   press: () {
@@ -298,7 +299,7 @@ class _dashboardssState extends State<dashboardss> {
                                                   },
                                                   title: ahmed[index].name,
                                                   image: ahmed[index].image,
-                                                  isuser: user.toString() == "admin@gmail.com"? "admin": "",
+                                                  isuser: user.toString() == "test@gmail.com"? "admin": "",
                                                   price: 20,
                                                   calories: "420Kcal",
                                                   description:
@@ -320,6 +321,58 @@ class _dashboardssState extends State<dashboardss> {
                                                     });
                                                   },
                                                 ),
+                                              ): Foodtile(
+
+                                                press: () {
+
+
+
+                                                  if(Responsive.isMobile(context))
+                                                    Navigator.of(context).push(MaterialPageRoute(builder: (context) => Fooddetailpage2(
+                                                      product: ahmed[index],
+                                                    )));
+
+                                                  // dailytrack daily = dailytrack(name: _products[0].name,
+                                                  //     image: _products[0].image, calories: _products[0].calories,
+                                                  //     fatcont: _products[0].fatcont, carbcont: _products[0].carbcont,
+                                                  //     proteincont: _products[0].proteincont, meal: "breakfast",
+                                                  //     ServingSize: _products[0].ServingSize, noofServings: _products[0].noofServings,
+                                                  //     dateTime: "dateTime", id: "id");
+
+                                                  //Provider.of<CartModel>(context, listen: false).addUser(daily);
+                                                  setState(() {
+                                                    Index = index;
+                                                    _productss = ahmed[index];
+                                                    //   product = value.products[index];
+                                                  });
+
+
+
+
+                                                },
+                                                title: ahmed[index].name,
+                                                image: ahmed[index].image,
+                                                isuser: user.toString() == "test@gmail.com"? "admin": "",
+                                                price: 20,
+                                                calories: "420Kcal",
+                                                description:
+                                                "Contrary to popular belief, Lorem Ipsum is not simply "
+                                                    "random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. ",
+                                                color: index ==Index? Colors.brown: Colors.grey,
+                                                value: addrecipes.contains(ahmed[index]),
+                                                onchanged: (bool? newvalue){
+                                                  setState(() {
+
+                                                    if(newvalue!){
+                                                      addrecipes.add(ahmed[index]);
+                                                    }
+                                                    else{
+                                                      addrecipes.remove(ahmed[index]);
+                                                    }
+
+
+                                                  });
+                                                },
                                               );
 
                                             }

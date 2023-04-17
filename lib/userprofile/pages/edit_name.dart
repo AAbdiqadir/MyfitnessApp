@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:string_validator/string_validator.dart';
 
@@ -29,6 +31,10 @@ class EditNameFormPageState extends State<EditNameFormPage> {
 
   void updateUserValue(String name) {
     user.name = name;
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final  currentuser = FirebaseAuth.instance.currentUser;
+    final uid = currentuser?.uid;
+    FirebaseFirestore.instance.collection('users').doc(uid).update({'name': name});
   }
 
   @override

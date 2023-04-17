@@ -95,7 +95,7 @@ class _caloriespageState extends State<caloriespage> {
 
         appBar:! Responsive.isDesktop(context) ? PreferredSize(
             preferredSize: Size(double.infinity, 80),
-            child:headers(name : UserData.current.name)
+            child:headers()
 
         ): null,
       //   appBar: PreferredSize(
@@ -129,7 +129,7 @@ class _caloriespageState extends State<caloriespage> {
 
                         children: [
                           if(Responsive.isDesktop(context))
-                          headers(color: Colors.grey[200],name : UserData.current.name),
+                          headers(color: Colors.grey[200],),
 
 
                           Row(

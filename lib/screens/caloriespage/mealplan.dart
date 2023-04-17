@@ -91,11 +91,11 @@ class _MealScreenState extends State<MealScreen> {
     return SafeArea(
       child: Scaffold(
           backgroundColor: Colors.grey[300],
-          appBar:! Responsive.isDesktop(context) ? PreferredSize(
+          appBar: PreferredSize(
               preferredSize: Size(double.infinity, 80),
-              child:headers(name: "Ahmey",)
+              child:headers()
 
-          ): null,
+          ),
           drawer: DrawerPage(),
           body: Row(
             crossAxisAlignment: CrossAxisAlignment.start,

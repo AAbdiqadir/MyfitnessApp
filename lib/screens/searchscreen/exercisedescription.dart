@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:myfitnessapp/datatesting.dart';
 import 'package:myfitnessapp/screens/intropage/widgets/textfields.dart';
 
 import '../../constants.dart';
@@ -50,10 +51,10 @@ class exercisedetailsState extends State<exercisedetails> {
             child: Container(
               width: double.infinity,
               height: height * 0.1,
-
-              child: videoplayer(
-                video: widget.video,
-              ),
+              child: video__(),
+              // child: videoplayer(
+              //   video: widget.video,
+              // ),
             ),
           ),
 

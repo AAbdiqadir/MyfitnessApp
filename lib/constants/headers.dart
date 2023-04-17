@@ -12,14 +12,14 @@ class headers extends StatelessWidget {
 
   const headers({Key? key,
     this.color = colors,
-    required this.name ,
+
   this.title = "Dashboard"}) : super(key: key);
 
 
 
   final title;
 
-  final name;
+
   final  color;
 
   @override
@@ -36,7 +36,7 @@ class headers extends StatelessWidget {
           padding: const EdgeInsets.all(5.0),
           child: Row(
             children: [
-              if(!Responsive.isDesktop(context))
+              if(!Responsive.isDesktop(context) )
               IconButton(
                 color: Colors.black,
                 iconSize: 30,
@@ -100,7 +100,7 @@ class headers extends StatelessWidget {
                       Padding(
                         padding:
                         const EdgeInsets.symmetric(horizontal: defaultPadding / 2),
-                        child: Text(name,
+                        child: Text("Profile",
                         style: GoogleFonts.openSans(
                         color: Color(0xFF022323),
                         fontSize: 15, fontWeight:  FontWeight.w300),

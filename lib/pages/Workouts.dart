@@ -33,7 +33,7 @@ class _WorkoutsState extends State<Workouts> {
         appBar:! Responsive.isDesktop(context) ?  PreferredSize(
             preferredSize: const Size(double.infinity, 80),
             // child:headers(title: "Exercise", name : )
-            child:headers( title: "Exercise", name : UserData.current.name)
+            child:headers( title: "Exercise", )
         ): null,
         // appBar: AppBar(
         //

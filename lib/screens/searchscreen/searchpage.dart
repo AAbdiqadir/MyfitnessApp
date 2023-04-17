@@ -82,7 +82,7 @@ class _dashboardsState extends State<dashboards> {
                   SizedBox(
 
                       height: MediaQuery.of(context).size.height * 0.10,
-                      child: headers(title: "Exercise",name : UserData.current.name)),
+                      child: headers(title: "Exercise",)),
 
 
 

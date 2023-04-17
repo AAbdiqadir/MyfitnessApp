@@ -62,7 +62,7 @@ class _HomepageState extends State<Homepage> {
 
           appBar:! Responsive.isDesktop(context) ? PreferredSize(
             preferredSize: Size(double.infinity, 80),
-        child:headers(name: UserData.current.name,)
+        child:headers()
 
           ): null,
 

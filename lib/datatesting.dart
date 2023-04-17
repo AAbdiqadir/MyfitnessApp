@@ -19,10 +19,12 @@ class _video__State extends State<video__> {
     String? videoId = "https://www.youtube.com/watch?v=2mYjBYHh3fc";
     _controller = YoutubePlayerController(
       initialVideoId: YoutubePlayer.convertUrlToId(videoId).toString(),
-      flags: const YoutubePlayerFlags(
+      flags:  YoutubePlayerFlags(
         autoPlay: false,
         mute: true,
         loop: false,
+        controlsVisibleAtStart: true,
+
 
       ),
 

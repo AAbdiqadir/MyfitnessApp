@@ -15,8 +15,11 @@ import '../../model/exercises.dart';
 import '../../model/exercises.dart';
 import '../../model/exercises.dart';
 import '../../model/exercises.dart';
+import '../../model/exercises.dart';
+import '../../model/exercises.dart';
 import '../../responsive_design.dart';
 import '../../userprofile/user/user_data.dart';
+import '../foods/searchbar.dart';
 import '../workoutdetailscreen/video.dart';
 import 'exercisedescription.dart';
 import 'exercisedescriptionpage.dart';
@@ -32,7 +35,7 @@ class dashboards extends StatefulWidget {
 }
 
 class _dashboardsState extends State<dashboards> {
-  final List exercises = const [
+  final List exercises_ = const [
     // [ itemName, itemPrice, imagePath, color ]
     ["Bench", "4.00", "calpage/feed_player.mp4", Color(0xFF848C98),"exercises/shoulder.jpg"],
     ["Cardio", "2.50", "calpage/pexels-tima-miroshnichenko-5320011.mp4", Color(0xFF848C98),"exercises/cardio.jpg"],
@@ -47,19 +50,28 @@ class _dashboardsState extends State<dashboards> {
   String video = "calpage/feed_player.mp4";
   var ahmed = "";
 
+  exercises? exercise;
+
+  late String ss ;
 
 
+  void setSearchString(String value) => setState(() {
+    ss = value;
 
-  List <String> foods= ['Chest', "Back","Shoulder","Legs", "Arms"];
+  });
+
+  List<Widget> searchResultTiles = [];
+  List <String> types= ['Chest', "Back","Shoulder","Legs", "Arms"];
 
   String? SelectedOption = "Chest";
 
   @override
   void initState() {
     // TODO: implement initState
-
+    ss = "";
     super.initState();
   }
+  late List <exercises> exercisecategory;
   @override
   Widget build(BuildContext context) {
     final Size _size = MediaQuery.of(context).size;
@@ -71,6 +83,10 @@ class _dashboardsState extends State<dashboards> {
 
             child: Consumer<CartModel>(
                 builder: (context, value, child) {
+                  exercisecategory = value.workouts.where((element) => element.type == SelectedOption).toList();
+
+                  exercise ??= exercisecategory[0];
+
 
 
 
@@ -111,41 +127,9 @@ class _dashboardsState extends State<dashboards> {
                                 child: Row(
                                   children: [
 
-                                    InkWell(
-                                      child: Container(
-                                        width: 300,
-                                        // width: Responsive.isDesktop(context)?_size.width*0.2:Responsive.isTablet(context)? _size.width*0.3 :
-                                        // _size.width < 552? _size.width*0.85 :_size.width*0.7,
-                                        child: TextField(
-
-
-                                          decoration: InputDecoration(
-                                              hintText: "Search",
-                                              fillColor: secondaryColor,
-                                              contentPadding: EdgeInsets.only(top: 10.0, left: 20
-
-                                              ),
-                                              filled: true,
-                                              border: OutlineInputBorder(
-                                                borderSide: BorderSide.none,
-                                                borderRadius: const BorderRadius.all(Radius.circular(10)),
-                                              ),
-
-                                              suffixIcon: Container(
-                                                padding: EdgeInsets.all(defaultPadding * 0.75),
-                                                margin: EdgeInsets.symmetric(
-                                                    horizontal: defaultPadding / 2),
-                                                decoration: BoxDecoration(
-                                                  //color: primaryColor,
-                                                  borderRadius: const BorderRadius.all(Radius.circular(10)),
-                                                ),
-                                                child: Icon( Icons.search),
-                                              )
-                                          ),
-
-                                        ),
-                                      ),
-                                    ),
+                                    search(
+                                        onChanged:setSearchString
+                                    )
                                   ],
                                 ),
                               ),
@@ -169,7 +153,7 @@ class _dashboardsState extends State<dashboards> {
 
                                           ),
                                           value : SelectedOption,
-                                          items: foods.map((e) =>  DropdownMenuItem<String>(
+                                          items: types.map((e) =>  DropdownMenuItem<String>(
                                               value: e,
                                               child: Text(
                                                 e,
@@ -208,7 +192,7 @@ class _dashboardsState extends State<dashboards> {
                                 ),
                                 child: GridView.builder(
                                     shrinkWrap: true,
-                                    itemCount: exercises.length,
+                                    itemCount: exercises_.length,
                                     gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount
                                       (crossAxisCount: 1,
                                       childAspectRatio: Responsive.isMobile(context) &&_size.width
@@ -220,17 +204,17 @@ class _dashboardsState extends State<dashboards> {
                                 {
                                   return featured(
 
-                                    itemName: exercises[index][0],
+                                    itemName: exercises_[index][0],
 
-                                    imagePath:exercises[index][1],
+                                    imagePath:exercises_[index][1],
                                     color:  index == checkedIndex? Colors.brown: Colors.black,
-                                    background: exercises[index][4],
+                                    background: exercises_[index][4],
                                     onPressed: (){
                                       setState(() {
                                         checkedIndex = index;
                                         if(Responsive.isMobile(context))
                                         Navigator.of(context).push(MaterialPageRoute(builder: (context) => exercisedescription(
-                                          Exercises: exercises[index][2],
+                                          Exercises: exercises_[index][2],
                                         )));
 
 

@@ -39,6 +39,13 @@ class _RegisterState extends State<Register> {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: emailController.text.trim(),
           password: password.text.trim()
+          
+
+          
+          
+
+          
+          
       );
     } on FirebaseAuthException catch(e){
       print(e);
@@ -56,8 +63,8 @@ class _RegisterState extends State<Register> {
   final  emailController = TextEditingController();
   final password = TextEditingController();
   final cmpassword = TextEditingController();
-  final firstNameController = TextEditingController();
-  final secondNameController = TextEditingController();
+  final username = TextEditingController();
+  final phone = TextEditingController();
 
   void pass(){
 
@@ -243,7 +250,24 @@ class _RegisterState extends State<Register> {
                                     ],
                                   ),
 
-
+                                  textfields(field: "Username", vontroller: emailController,
+                                      obsecure: false,
+                                      onvalidate: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Please enter your email.';
+                                        }
+                                        return null;
+                                      }
+                                  ),
+                                  textfields(field: "Phone", vontroller: emailController,
+                                      obsecure: false,
+                                      onvalidate: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Please enter your email.';
+                                        }
+                                        return null;
+                                      }
+                                  ),
                                   textfields(field: "Email", vontroller: emailController,
                                     obsecure: false,
                                     onvalidate: (value) {
@@ -253,6 +277,7 @@ class _RegisterState extends State<Register> {
                                       return null;
                                     }
                                   ),
+
                                   SizedBox(height: height * 0.014),
                                   textfields(field: "Password", vontroller: password,
                                     obsecure: true,

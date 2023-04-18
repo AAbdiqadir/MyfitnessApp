@@ -85,7 +85,7 @@ class _dashboardsState extends State<dashboards> {
                 builder: (context, value, child) {
                   exercisecategory = value.workouts.where((element) => element.type == SelectedOption).toList();
 
-                  exercise ??= exercisecategory[0];
+                  //exercise ??= exercisecategory[0];
 
 
 

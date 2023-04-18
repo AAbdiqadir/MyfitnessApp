@@ -155,7 +155,10 @@ class _RegisterState extends State<Register> {
                                 ),
 
 
-                                IconButton(onPressed: (){}, icon: Icon(Icons.arrow_back,
+                                IconButton(onPressed: () {
+                                  Get.back(
+                                  );
+                                }, icon: Icon(Icons.arrow_back,
                                     color: Colors.grey[300]
 
                                 ))

@@ -16,7 +16,7 @@ class _video__State extends State<video__> {
   @override
   void initState() {
     // TODO: implement initState
-    String? videoId = "https://www.youtube.com/watch?v=2mYjBYHh3fc";
+    String? videoId = "https://www.youtube.com/watch?v=rT7DgCr-3pg&pp=ygULYmVuY2ggcHJlc3M%3D";
     _controller = YoutubePlayerController(
       initialVideoId: YoutubePlayer.convertUrlToId(videoId).toString(),
       flags:  YoutubePlayerFlags(
@@ -61,22 +61,35 @@ class _video__State extends State<video__> {
   bool shouldPop = true;
   @override
   Widget build(BuildContext context) {
-    return YoutubePlayerBuilder(
-        player: YoutubePlayer(
-          controller: _controller,
+      return Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: YoutubePlayerBuilder(
+            player: YoutubePlayer(
+              controller: _controller,
+                bottomActions: [
 
+                  // CurrentPosition(),
+                  // if
+
+                  PlayPauseButton()
+                  // ProgressBar(),
+                  // RemainingDuration(),
+                  // PlaybackSpeedButton(),
+                ]
+
+            ),
+            builder: (context, player){
+              return Column(
+                children: [
+                  // some widgets
+                  player,
+                  //some other widgets
+                ],
+              );
+
+        }
         ),
-        builder: (context, player){
-          return Column(
-            children: [
-              // some widgets
-              player,
-              //some other widgets
-            ],
-          );
-
-    }
-    );
+      );
   }
 
   youtubeHierarchy() {

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -29,13 +30,19 @@ class ButtonsInfo {
 
 
 int _currentIndex = 0;
-
+final FirebaseAuth auth = FirebaseAuth.instance;
+final  user = FirebaseAuth.instance.currentUser;
+final uid = user?.uid;
 List<ButtonsInfo> _buttonNames = [
   ButtonsInfo(title: "Home", icon: FontAwesomeIcons.house, page: Homepage()),
   ButtonsInfo(title: "Food", icon: FontAwesomeIcons.utensils ,page: food()),
   ButtonsInfo(title: "Exercise", icon: FontAwesomeIcons.dumbbell,page: Workouts()),
   ButtonsInfo(title: "Meal Plan", icon: FontAwesomeIcons.nutritionix, page: MealScreen()),
+
+
+  if(user?.email == "admin@gmail.com")
   ButtonsInfo(title: "Addfood", icon: FontAwesomeIcons.squarePlus, page:foodform()),
+  if(user?.email == "admin@gmail.com")
   ButtonsInfo(title: "AddWorkout", icon: FontAwesomeIcons.squarePlus, page:workout())
 ];
 

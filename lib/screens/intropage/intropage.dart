@@ -129,7 +129,7 @@ class _intropageState extends State<intropage> {
                                 children: [
                                   InkWell(
                                     onTap: (){
-                                      Get.to(()=> _MmainPage() ,arguments: "intropage",
+                                      Get.to(()=> mmmainPage() ,
                                       transition: Transition.fade,
                                         duration: 1.5.seconds
                                       );

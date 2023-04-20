@@ -40,11 +40,7 @@ class workoutState extends State<workout> {
   Future <void> adddata() async{
 
 
-    if(name.text.trim().isEmpty||image.text.trim().isEmpty||video.text.trim().isEmpty||
-        Type.text.trim().isEmpty|| Description.text.trim().isEmpty||ExerciseAnatomy.text.trim().isEmpty) {
 
-      return;
-    }
 
     BuildContext dialogContext;
 
@@ -65,19 +61,24 @@ class workoutState extends State<workout> {
 
     String DOCID = uuid.v4();
 
+    exercises workout = exercises(type: Type.text.trim(),
+        Image: image.text.trim(),
+        ExerciseAnatomy: ExerciseAnatomy.text.trim(),
+        Description: Description.text.trim(),
+        video: video.text.trim(),
+        name: name.text.trim(),
+        ExerciseId: DOCID);
 
 
 
-    //Provider.of<CartModel>(context, listen: false).addfood(products,DOCID );
-    // name.clear();
-    // image.clear();
-    // proteincont.clear();
-    // calories.clear();
-    // fatcont.clear();
-    // carbcont.clear();
-    // Type.clear();
-    // Serving.clear();
-    // NumberofServing.clear();
+
+    Provider.of<CartModel>(context, listen: false).addworkout(workout,DOCID );
+    name.clear();
+    image.clear();
+    ExerciseAnatomy.clear();
+    Type.clear();
+    Description.clear();
+    video.clear();
 
 
     Navigator.pop(context);
@@ -100,7 +101,7 @@ class workoutState extends State<workout> {
   }
 
   bool ahmed = false;
-
+  final formkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -131,214 +132,247 @@ class workoutState extends State<workout> {
 
 
         ): null,
-        body: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            if(!Responsive.isMobile(context))
+        body: Form(
+          key: formkey,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              if(!Responsive.isMobile(context))
+                Expanded(
+
+                  child: Container(
+
+                    decoration: BoxDecoration(
+                      image:DecorationImage(
+                          image: AssetImage("exercises/young-fitness-man-studio.jpg",
+
+
+
+                          ),
+                          fit: BoxFit.cover
+                      ),
+                      // height: height,
+
+
+                    ),
+                    width: double.infinity,
+                    height: height,
+
+
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+
+                        Container(
+                          child:
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: 10,
+                              ),
+
+
+                              IconButton(onPressed: (){}, icon: Icon(Icons.arrow_back,
+                                  color: Colors.grey[300]
+
+                              ))
+                            ],
+                          ),
+                        )
+                      ],
+
+                    ),
+
+
+
+                  ),
+                ),
               Expanded(
 
                 child: Container(
-
-                  decoration: BoxDecoration(
-                    image:DecorationImage(
-                        image: AssetImage("exercises/young-fitness-man-studio.jpg",
-
-
-
-                        ),
-                        fit: BoxFit.cover
-                    ),
-                    // height: height,
-
-
-                  ),
-                  width: double.infinity,
                   height: height,
+                  width: double.infinity,
+                  //margin: EdgeInsets.symmetric(horizontal: ResponsiveWidget.isSmallScreen(context)? height * 0.032 : height * 0.12),
+                  color: Colors.grey[300],
+                  child: SingleChildScrollView(
 
+                    child: SizedBox(
+                      width: 200,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
 
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
+                        children: [
+                          Expanded(
+                            child: SizedBox(
 
-                      Container(
-                        child:
-                        Row(
-                          children: [
-                            SizedBox(
-                              width: 10,
-                            ),
+                              child: Column(
 
+                                children: [
+                                  SizedBox(height: Responsive.isMobile(context)? height * 0.1:height * 0.1,
 
-                            IconButton(onPressed: (){}, icon: Icon(Icons.arrow_back,
-                                color: Colors.grey[300]
+                                    child: Container(
 
-                            ))
-                          ],
-                        ),
-                      )
-                    ],
+                                      decoration: BoxDecoration(
 
-                  ),
+                                          borderRadius: BorderRadius.all(Radius.circular(10))
+                                      ),
+                                      child: Center(
 
-
-
-                ),
-              ),
-            Expanded(
-
-              child: Container(
-                height: height,
-                width: double.infinity,
-                //margin: EdgeInsets.symmetric(horizontal: ResponsiveWidget.isSmallScreen(context)? height * 0.032 : height * 0.12),
-                color: Colors.grey[300],
-                child: SingleChildScrollView(
-
-                  child: SizedBox(
-                    width: 200,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-
-                      children: [
-                        Expanded(
-                          child: SizedBox(
-
-                            child: Column(
-
-                              children: [
-                                SizedBox(height: Responsive.isMobile(context)? height * 0.1:height * 0.1,
-
-                                  child: Container(
-
-                                    decoration: BoxDecoration(
-
-                                        borderRadius: BorderRadius.all(Radius.circular(10))
-                                    ),
-                                    child: Center(
-
-                                      // child:Lottie.network(
-                                      //     "https://assets4.lottiefiles.com/packages/lf20_le8PpGpm9v.json",
-                                      //     fit: BoxFit.cover
-                                      // ),
+                                        // child:Lottie.network(
+                                        //     "https://assets4.lottiefiles.com/packages/lf20_le8PpGpm9v.json",
+                                        //     fit: BoxFit.cover
+                                        // ),
+                                      ),
                                     ),
                                   ),
-                                ),
 
 
 
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      width: Responsive.isDesktop(context)? width*0.4:Responsive.isTablet(context)? width*0.4 :width < 552? width*0.85 :width*0.7,
-                                      child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        width: Responsive.isDesktop(context)? width*0.4:Responsive.isTablet(context)? width*0.4 :width < 552? width*0.85 :width*0.7,
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
 
-                                          Text('Enter Workout description',
-                                            style: openSans.copyWith(
-                                              fontSize: 20.0,
-                                              fontWeight: FontWeight.w700,
-                                              color: AppColorss.textColor,
+                                            Text('Enter Workout description',
+                                              style: openSans.copyWith(
+                                                fontSize: 20.0,
+                                                fontWeight: FontWeight.w700,
+                                                color: AppColorss.textColor,
+                                              ),
                                             ),
-                                          ),
-                                          SizedBox(height: height * 0.02),
+                                            SizedBox(height: height * 0.02),
 
-                                          SizedBox(height: height * 0.064),
+                                            SizedBox(height: height * 0.064),
 
-                                        ],
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                textfields(field: "Name", vontroller: name,
-                                  obsecure: false,
-                                ),
-                                SizedBox(height: height * 0.014),
-                                textfields(field: "Image",vontroller: image,
-                                  obsecure: false,
+                                    ],
+                                  ),
+                                  textfields(field: "Name", vontroller: name,
+                                    obsecure: false,
+                                      onvalidate: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Please enter your phone numebr.';
+                                        }
+                                        return null;
+                                      }
+                                  ),
+                                  SizedBox(height: height * 0.014),
+                                  textfields(field: "Image",vontroller: image,
+                                    obsecure: false,
+                                      onvalidate: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Please enter your phone numebr.';
+                                        }
+                                        return null;
+                                      }
 
-                                ), SizedBox(height: height * 0.014),
+                                  ), SizedBox(height: height * 0.014),
 
-                                textfields(field: "ExerciseAnatomy", vontroller: ExerciseAnatomy,
-                                  obsecure: false,
-                                  onvalidate: (value)=> value!= null&&value.length >1&&!value.isNum?
-                                  'Enter password correctly':null,
-                                ),
-                                SizedBox(height: height * 0.014),
+                                  textfields(field: "ExerciseAnatomy", vontroller: ExerciseAnatomy,
+                                    obsecure: false,
+                                      onvalidate: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Please enter your phone numebr.';
+                                        }
+                                        return null;
+                                      }
+                                  ),
+                                  SizedBox(height: height * 0.014),
 
-                                textfields(field: "Description", vontroller: Description,
-                                  obsecure: false,
-                                  onvalidate: (value)=> value!= null&&value.length >1&&!value.isNum?
-                                  'Enter password correctly':null,
-                                ),
-                                SizedBox(height: height * 0.014),
+                                  textfields(field: "Description", vontroller: Description,
+                                    obsecure: false,
+                                      onvalidate: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Please enter your phone numebr.';
+                                        }
+                                        return null;
+                                      }
+                                  ),
+                                  SizedBox(height: height * 0.014),
 
-                                textfields(field: "video", vontroller: video,
-                                  obsecure: false,
-                                  onvalidate: (value)=> value!= null&&value.length >1&&!value.isNum?
-                                  'Enter password correctly':null,
-                                ),
-                                SizedBox(height: height * 0.014),
+                                  textfields(field: "video", vontroller: video,
+                                    obsecure: false,
+                                      onvalidate: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Please enter your phone numebr.';
+                                        }
+                                        return null;
+                                      }
+                                  ),
+                                  SizedBox(height: height * 0.014),
 
-                                textfields(field: "Type", vontroller: Type,
-                                  obsecure: false,
-                                  onvalidate: (value)=> value!= null&&value.length >1&&!value.isNum?
-                                  'Enter password correctly':null,
-                                ),
+                                  textfields(field: "Type", vontroller: Type,
+                                    obsecure: false,
+                                      onvalidate: (value) {
+                                        if (value == null || value.isEmpty) {
+                                          return 'Please enter your phone numebr.';
+                                        }
+                                        return null;
+                                      }
+                                  ),
 
 
 
-                                SizedBox(height: height * 0.05),
+                                  SizedBox(height: height * 0.05),
 
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    InkWell(
-                                      onTap: (){
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      InkWell(
+                                        onTap: (){
+                                      if (formkey.currentState!.validate()) {
                                         adddata();
-                                        setState(() {
-                                        });
+                                      }
+                                          setState(() {
+                                          });
 
-                                      },
-                                      child: Container(
-                                        width: Responsive.isDesktop(context)? width*0.4:Responsive.isTablet(context)? width*0.4 :width*0.7,
-                                        padding: const EdgeInsets.all(25),
+                                        },
+                                        child: Container(
+                                          width: Responsive.isDesktop(context)? width*0.4:Responsive.isTablet(context)? width*0.4 :width*0.7,
+                                          padding: const EdgeInsets.all(25),
 
-                                        decoration: BoxDecoration(
-                                          color: Colors.black,
-                                          borderRadius: BorderRadius.circular(8),
-                                        ),
-                                        child: const Center(
-                                          child: Text(
-                                            "Submit",
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 16,
+                                          decoration: BoxDecoration(
+                                            color: Colors.black,
+                                            borderRadius: BorderRadius.circular(8),
+                                          ),
+                                          child: const Center(
+                                            child: Text(
+                                              "Submit",
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 16,
+                                              ),
                                             ),
                                           ),
                                         ),
                                       ),
-                                    ),
 
-                                  ],
-                                )
-                                ,
-                                const SizedBox(height: 50),
+                                    ],
+                                  )
+                                  ,
+                                  const SizedBox(height: 50),
 
 
-                              ],
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

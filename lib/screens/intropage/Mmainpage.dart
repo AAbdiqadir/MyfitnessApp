@@ -7,14 +7,14 @@ import '../../pages/Homepage.dart';
 import '../../pages/intropage.dart';
 import 'Login.dart';
 import 'intropage.dart';
-class _MmainPage extends StatefulWidget {
-  const _MmainPage({Key? key}) : super(key: key);
+class mmmainPage extends StatefulWidget {
+  const mmmainPage({Key? key}) : super(key: key);
 
   @override
-  State<_MmainPage> createState() => _MmainPageState();
+  State<mmmainPage> createState() => _MmainPageState();
 }
 
-class _MmainPageState extends State<_MmainPage> {
+class _MmainPageState extends State<mmmainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

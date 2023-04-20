@@ -67,13 +67,27 @@ class addtorecipesState extends State<addtorecipes> {
     String DOCID = uuid.v4();
     List <String> ingr =[];
 
+    int totalcal =0;
+    int tprotein =0;
+    int tcarb=0;
+    int tfat=0;
+
+
+    for (int i =0 ; i<widget.addrecipes.length;i++){
+
+      totalcal = totalcal +widget.addrecipes[i].calories;
+      tprotein = tprotein +widget.addrecipes[i].proteincont;
+      tcarb = tcarb +widget.addrecipes[i].carbcont;
+      tfat = tfat +widget.addrecipes[i].fatcont;
+
+    }
 
 
 
     Product products = Product(name: name.text.trim(), image: image.text.trim(),
-        calories: 300, fatcont: 40,
-        carbcont: 20, proteincont: 30,
-        type: "Recipe", ServingSize: "1 medium", noofServings: "12",
+        calories: totalcal, fatcont: tfat,
+        carbcont: tcarb, proteincont: tprotein,
+        type: "Recipe", ServingSize: "1 medium", noofServings: "1",
         FoodID: DOCID
     );
 
@@ -94,7 +108,7 @@ class addtorecipesState extends State<addtorecipes> {
 
 
     }
-    Ingredient ingredient = Ingredient(products: ingr, id: DOCID);
+    Ingredient ingredient = Ingredient(products: ingr, id: DOCID,instruction:"" );
     Provider.of<CartModel>(context, listen: false).recipeingridents(ingredient, DOCID);
 
     Navigator.pop(context);
@@ -267,7 +281,7 @@ class addtorecipesState extends State<addtorecipes> {
                                   obsecure: false,
                                     onvalidate: (value) {
                                       if (value == null || value.isEmpty) {
-                                        return 'Please enter your email.';
+                                        return 'Please enter the name.';
                                       }
                                       return null;
                                     }
@@ -277,7 +291,7 @@ class addtorecipesState extends State<addtorecipes> {
                                   obsecure: false,
                                     onvalidate: (value) {
                                       if (value == null || value.isEmpty) {
-                                        return 'Please enter your email.';
+                                        return 'Please enter the image.';
                                       }
                                       return null;
                                     }
@@ -285,21 +299,13 @@ class addtorecipesState extends State<addtorecipes> {
                                 ), SizedBox(height: height * 0.014),
 
 
-                                textfields(field: "Serving", vontroller: Serving,
-                                  obsecure: false,
-                                    onvalidate: (value) {
-                                      if (value == null || value.isEmpty) {
-                                        return 'Please enter your email.';
-                                      }
-                                      return null;
-                                    }
 
-                                ),
+
                                 textfields(field: "Instructions", vontroller: NumberofServing,
                                   obsecure: false,
                                     onvalidate: (value) {
                                       if (value == null || value.isEmpty) {
-                                        return 'Please enter your email.';
+                                        return 'Please enter the instruction.';
                                       }
                                       return null;
                                     }

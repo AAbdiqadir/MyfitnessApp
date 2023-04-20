@@ -21,7 +21,7 @@ class EditNameFormPageState extends State<EditNameFormPage> {
   final _formKey = GlobalKey<FormState>();
   final firstNameController = TextEditingController();
   final secondNameController = TextEditingController();
-  var user = UserData.myUser;
+  var user = UserData.current;
 
   @override
   void dispose() {

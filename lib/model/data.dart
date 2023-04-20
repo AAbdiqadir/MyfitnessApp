@@ -97,16 +97,22 @@ class CartModel extends ChangeNotifier {
     });
   }
 
-  Future<void> addworkout(exercises workouts) {
+  Future<void> addworkout(exercises workouts,String ID) {
     // Call the user's CollectionReference to add a new user
     //User? user = FirebaseAuth.instance.currentUser;
 
 
     CollectionReference users = FirebaseFirestore.instance.collection('workouts');
     final json = workouts.toJon();
-    return users.doc().set(json)
-        .then((value) => print("User Added"))
-        .catchError((error) => print("Failed to add user: $error"));
+    return users.doc(ID).set(json)
+        .whenComplete(() => Get.snackbar(
+        "Success", "You have added workout successfully",
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red.withOpacity(0.1)
+    )).catchError((error,stackTrace){
+      Get.snackbar(
+          "Error", "Something went wrong try again");
+    });
   }
 
   Future<void> recipeingridents(Ingredient ingredient, String DocID)  {

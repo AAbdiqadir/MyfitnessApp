@@ -46,6 +46,7 @@ class _dashboardssState extends State<dashboardss> {
 
 
 
+  String admin = "admin@gmail.com";
 
   @override
   void initState() {
@@ -67,7 +68,7 @@ class _dashboardssState extends State<dashboardss> {
     return Scaffold(
 
 
-      floatingActionButton: addrecipes.isNotEmpty && user.toString() == "test@gmail.com" ? Row(
+      floatingActionButton: addrecipes.isNotEmpty && user.toString() == admin ? Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
            Text('Add recipes',
@@ -251,7 +252,7 @@ class _dashboardssState extends State<dashboardss> {
                                                 (context,index)
                                             {
                                               final item = ahmed[index];
-                                              return  user.toString() == "test@gmail.com"  ?Dismissible(
+                                              return  user.toString() == admin  ?Dismissible(
                                                 background: Container(color: Colors.red),
                                                 key: UniqueKey(),
                                                 // Provide a function that tells the app
@@ -299,7 +300,7 @@ class _dashboardssState extends State<dashboardss> {
                                                   },
                                                   title: ahmed[index].name,
                                                   image: ahmed[index].image,
-                                                  isuser: user.toString() == "test@gmail.com"? "admin": "",
+                                                  isuser: user.toString() == admin? "admin": "",
                                                   price: 20,
                                                   calories: "420Kcal",
                                                   description:
@@ -352,7 +353,7 @@ class _dashboardssState extends State<dashboardss> {
                                                 },
                                                 title: ahmed[index].name,
                                                 image: ahmed[index].image,
-                                                isuser: user.toString() == "test@gmail.com"? "admin": "",
+                                                isuser: user.toString() == admin? "admin": "",
                                                 price: 20,
                                                 calories: "420Kcal",
                                                 description:

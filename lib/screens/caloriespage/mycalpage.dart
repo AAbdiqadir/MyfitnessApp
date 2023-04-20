@@ -221,6 +221,13 @@ class mealState extends State<meal> {
                                         color: Colors.black,
                                       ),
                                       onPressed: () {
+                                        final FirebaseAuth auth = FirebaseAuth.instance;
+                                        final  user = FirebaseAuth.instance.currentUser;
+                                        final uid = user?.uid;
+                                        FirebaseFirestore.instance.collection('cart').doc(uid).collection("meals").doc(ahmed[index].mealfor_day.id).delete();
+                                        value.allmeals_.remove(ahmed[index]);
+
+
 
 
 

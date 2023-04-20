@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -64,7 +66,9 @@ class _dashboardsState extends State<dashboards> {
   List <String> types= ['Chest', "Back","Shoulder","Leg", "Arms"];
 
   String? SelectedOption = "Chest";
-
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  final  user = FirebaseAuth.instance.currentUser?.email;
+  String admin = "admin@gmail.com";
   @override
   void initState() {
     // TODO: implement initState
@@ -202,7 +206,48 @@ class _dashboardsState extends State<dashboards> {
                                     ), itemBuilder:
                                     (context,index)
                                 {
-                                  return featured(
+                                  final item = exercisecategory[index];
+                                  return user.toString() == admin ?Dismissible(
+                                    background: Container(color: Colors.red),
+                                    key: UniqueKey(),
+                                    onDismissed: (direction) {
+                                      // Remove the item from the data source.
+                                      setState(() {
+                                        value.workouts.remove(exercisecategory[index]);
+                                        FirebaseFirestore.instance.collection("workouts").doc(exercisecategory[index].ExerciseId).delete();
+                                      });
+
+                                      // Then show a snackbar.
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(SnackBar(content: Text("${item.name}Dismissed")));
+                                    } ,
+
+                                    child: featured(
+
+                                      itemName: exercisecategory[index].name,
+
+                                      imagePath:exercises_[index][1],
+                                      color:  index == checkedIndex? Colors.brown: Colors.black,
+                                      background: exercisecategory[index].Image,
+                                      onPressed: (){
+                                        setState(() {
+                                          checkedIndex = index;
+                                          exercise = exercisecategory[index];
+
+                                          if(Responsive.isMobile(context)) {
+                                            Navigator.of(context).push(MaterialPageRoute(builder: (context) => exercisedescription(
+                                            Exercise: exercisecategory[index],
+                                          )));
+                                          }
+
+
+
+                                        });
+                                      },
+
+
+                                    ),
+                                  ):featured(
 
                                     itemName: exercisecategory[index].name,
 
@@ -216,8 +261,8 @@ class _dashboardsState extends State<dashboards> {
 
                                         if(Responsive.isMobile(context)) {
                                           Navigator.of(context).push(MaterialPageRoute(builder: (context) => exercisedescription(
-                                          Exercise: exercisecategory[index],
-                                        )));
+                                            Exercise: exercisecategory[index],
+                                          )));
                                         }
 
 

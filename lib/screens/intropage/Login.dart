@@ -417,7 +417,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                                   Get.back();
                                                 }
                                                 else {
-                                                  Get.to(() => Register(),
+                                                  Get.to(() => mmmainPage(),
                                                       arguments: "register",
                                                       transition: Transition
                                                           .leftToRightWithFade);

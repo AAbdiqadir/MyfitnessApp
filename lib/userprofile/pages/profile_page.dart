@@ -50,6 +50,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
           children: [
 
+
             Center(
                 child: Padding(
                     padding: EdgeInsets.only(bottom: 20),

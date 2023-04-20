@@ -126,40 +126,54 @@ class _caltodayState extends State<caltoday> {
                 itemCount: ahmed.length,
                 padding: EdgeInsets.all(7),
                 itemBuilder: (context, index) {
+                  final item = ahmed[index];
                   return Padding(
                     padding: const EdgeInsets.all(12.0),
                     child: Container(
                       decoration: BoxDecoration(
                           color: Colors.grey[200],
                           borderRadius: BorderRadius.circular(8)),
-                      child: ListTile(
-                        leading: Image.network(
-                          ahmed[index].product.image,
-                          height: 36,
-                        ),
 
-                        title: Text(
-                          ahmed[index].product.name,
-                            style: GoogleFonts.openSans(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.black
-                            ),
-                        ),
-                        trailing: IconButton(
-                            icon: const Icon(Icons.delete,
-                            color: Colors.black,
-                            ),
-                            onPressed: () {
+                      child: Dismissible(
+
+                        background: Container(color: Colors.red),
+                        key: UniqueKey(),
+                        onDismissed: (direction) {
+                          // Remove the item from the data source.
+                          setState(() {
 
 
+                            value.allmeals_.remove(item);
 
-                          //
-                          //     Provider.of<CartModel>(context, listen: false).deleteField(ahmed[index].id);
-                          //
-                          //     print(value.dailys.length);
 
-                            }
+                            final FirebaseAuth auth = FirebaseAuth.instance;
+                            final  user = FirebaseAuth.instance.currentUser;
+                            final uid = user?.uid;
+                            FirebaseFirestore.instance.collection('cart').doc(uid).collection("meals").doc(item.mealfor_day.id).delete();
+
+
+                          });
+
+                          // Then show a snackbar.
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(content: Text("Meal Dismissed")));
+                        } ,
+
+                        child: ListTile(
+                          leading: Image.network(
+                            ahmed[index].product.image,
+                            height: 36,
+                          ),
+
+                          title: Text(
+                            ahmed[index].product.name,
+                              style: GoogleFonts.openSans(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.black
+                              ),
+                          ),
+
                         ),
                       ),
                     ),

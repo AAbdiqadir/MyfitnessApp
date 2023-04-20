@@ -41,6 +41,10 @@ class _HomepageState extends State<Homepage> {
   void initState() {
     // TODO: implement initState
     UserData().fetchuser();
+    Provider.of<CartModel>(context, listen: false).fetchmeals();
+    Provider.of<CartModel>(context, listen: false).fetchProducts();
+    Provider.of<CartModel>(context, listen: false).ingredientid();
+    Provider.of<CartModel>(context, listen: false).fetchworkouts();
     super.initState();
   }
 

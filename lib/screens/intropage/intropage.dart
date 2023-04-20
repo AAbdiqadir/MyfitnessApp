@@ -9,6 +9,7 @@ import 'package:myfitnessapp/screens/intropage/widgets/textfields.dart';
 import '../../constants.dart';
 import '../../responsive_design.dart';
 import 'mainpage.dart';
+import 'Mmainpage.dart';
 class intropage extends StatefulWidget {
   const intropage({Key? key}) : super(key: key);
 
@@ -128,7 +129,7 @@ class _intropageState extends State<intropage> {
                                 children: [
                                   InkWell(
                                     onTap: (){
-                                      Get.to(()=> Register() ,arguments: "intropage",
+                                      Get.to(()=> _MmainPage() ,arguments: "intropage",
                                       transition: Transition.fade,
                                         duration: 1.5.seconds
                                       );

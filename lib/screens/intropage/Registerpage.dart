@@ -1,9 +1,11 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:myfitnessapp/screens/intropage/widgets/textfields.dart';
+import 'package:myfitnessapp/userprofile/user/user.dart';
 import 'package:string_validator/string_validator.dart';
 
 import '../../constants.dart';
@@ -11,6 +13,8 @@ import '../../responsive_design.dart';
 import 'Login.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:email_validator/email_validator.dart';
+
+import 'mainpage.dart';
 class Register extends StatefulWidget {
   const Register({Key? key}) : super(key: key);
 
@@ -24,6 +28,9 @@ class _RegisterState extends State<Register> {
   Future Signup() async{
     BuildContext dialogContext;
 
+
+    Users user = Users(name: username.text.trim(), email: emailController.text.trim(), phone: phone.text.trim(), aboutMeDescription: "coming soon ");
+
     showDialog(context: context,
         barrierDismissible: false,
         builder: (BuildContext context)
@@ -36,9 +43,12 @@ class _RegisterState extends State<Register> {
 
         });
     try {
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
+
+      UserCredential userCredential = await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: emailController.text.trim(),
           password: password.text.trim()
+
+
           
 
           
@@ -47,6 +57,9 @@ class _RegisterState extends State<Register> {
           
           
       );
+      String? useId = userCredential.user?.uid;
+
+      FirebaseFirestore.instance.collection("users").doc(useId).set(user.toJson());
     } on FirebaseAuthException catch(e){
       print(e);
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -253,7 +266,7 @@ class _RegisterState extends State<Register> {
                                     ],
                                   ),
 
-                                  textfields(field: "Username", vontroller: emailController,
+                                  textfields(field: "Username", vontroller: username,
                                       obsecure: false,
                                       onvalidate: (value) {
                                         if (value == null || value.isEmpty) {
@@ -262,7 +275,7 @@ class _RegisterState extends State<Register> {
                                         return null;
                                       }
                                   ),
-                                  textfields(field: "Phone", vontroller: emailController,
+                                  textfields(field: "Phone", vontroller: phone,
                                       obsecure: false,
                                       onvalidate: (value) {
                                         if (value == null || value.isEmpty) {
@@ -275,7 +288,7 @@ class _RegisterState extends State<Register> {
                                     obsecure: false,
                                     onvalidate: (value) {
                                       if (value == null || value.isEmpty) {
-                                        return 'Please enter your email.';
+                                        return 'Please enter your phone numebr.';
                                       }
                                       return null;
                                     }
@@ -286,7 +299,7 @@ class _RegisterState extends State<Register> {
                                     obsecure: true,
                                     onvalidate: (value) {
                                     if (value == null || value.isEmpty) {
-                                    return 'Please enter your last name';
+                                    return 'Please enter your password';
                                     }
                                     return null;
                                     },
@@ -296,7 +309,7 @@ class _RegisterState extends State<Register> {
                                     obsecure: true,
                                     onvalidate: (value) {
                                       if (value == null || value.isEmpty) {
-                                        return 'Please enter your last name';
+                                        return 'Please enter your the correct password you used';
                                       } else if (value != password.text ) {
                                         return 'Password is not the same';
                                       }
@@ -376,7 +389,7 @@ class _RegisterState extends State<Register> {
                                                if(x == "login"){
                                                  Get.back();}
                                                else{
-                                                 Get.to(()=> LoginScreen(),  arguments: "register",
+                                                 Get.to(()=> mainPage(),  arguments: "register",
                                                      );
 
                                                }

@@ -27,6 +27,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     // TODO: implement initState
+    UserData().fetchuser();
 
     super.initState();
   }

@@ -7,10 +7,10 @@ import '../../responsive_design.dart';
 import 'exercisedescription.dart';
 class exercisedescription extends StatefulWidget {
    exercisedescription({Key? key,
-     required this.Exercises
+     required this.Exercise
   }) : super(key: key);
 
-   String Exercises;
+    exercises Exercise;
   @override
   State<exercisedescription> createState() => _exercisedescriptionState();
 }
@@ -47,7 +47,7 @@ class _exercisedescriptionState extends State<exercisedescription> {
               ],
             ),
           ),): null,
-        body: SingleChildScrollView(child: exercisedetails(video: widget.Exercises,)),
+         body: SingleChildScrollView(child: exercisedetails(workout: widget.Exercise,)),
       ),
     );
   }

@@ -3,8 +3,13 @@ import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 
 class video__ extends StatefulWidget {
-  const video__({Key? key}) : super(key: key);
+   video__({Key? key,
+     required this.video
 
+  })
+       : super(key: key);
+
+  String video ;
   @override
   State<video__> createState() => _video__State();
 }
@@ -16,7 +21,7 @@ class _video__State extends State<video__> {
   @override
   void initState() {
     // TODO: implement initState
-    String? videoId = "https://www.youtube.com/watch?v=rT7DgCr-3pg&pp=ygULYmVuY2ggcHJlc3M%3D";
+    String? videoId = widget.video;
     _controller = YoutubePlayerController(
       initialVideoId: YoutubePlayer.convertUrlToId(videoId).toString(),
       flags:  YoutubePlayerFlags(
@@ -71,7 +76,7 @@ class _video__State extends State<video__> {
                   // CurrentPosition(),
                   // if
 
-                  PlayPauseButton()
+
                   // ProgressBar(),
                   // RemainingDuration(),
                   // PlaybackSpeedButton(),

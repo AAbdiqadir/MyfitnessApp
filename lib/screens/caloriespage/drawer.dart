@@ -4,6 +4,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:myfitnessapp/pages/Homepage.dart';
 import 'package:myfitnessapp/profile&managementscreen/foodformpage.dart';
+import 'package:myfitnessapp/profile&managementscreen/workoutform.dart';
 import 'package:myfitnessapp/screens/caloriespage/responive.dart';
 
 import '../../pages/Workouts.dart';
@@ -34,7 +35,8 @@ List<ButtonsInfo> _buttonNames = [
   ButtonsInfo(title: "Food", icon: FontAwesomeIcons.utensils ,page: food()),
   ButtonsInfo(title: "Exercise", icon: FontAwesomeIcons.dumbbell,page: Workouts()),
   ButtonsInfo(title: "Meal Plan", icon: FontAwesomeIcons.nutritionix, page: MealScreen()),
-  ButtonsInfo(title: "Addfood", icon: FontAwesomeIcons.squarePlus, page:foodform())
+  ButtonsInfo(title: "Addfood", icon: FontAwesomeIcons.squarePlus, page:foodform()),
+  ButtonsInfo(title: "AddWorkout", icon: FontAwesomeIcons.squarePlus, page:workout())
 ];
 
 class DrawerPage extends StatefulWidget {

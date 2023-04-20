@@ -61,7 +61,7 @@ class _dashboardsState extends State<dashboards> {
   });
 
   List<Widget> searchResultTiles = [];
-  List <String> types= ['Chest', "Back","Shoulder","Legs", "Arms"];
+  List <String> types= ['Chest', "Back","Shoulder","Leg", "Arms"];
 
   String? SelectedOption = "Chest";
 
@@ -85,7 +85,7 @@ class _dashboardsState extends State<dashboards> {
                 builder: (context, value, child) {
                   exercisecategory = value.workouts.where((element) => element.type == SelectedOption).toList();
 
-                  //exercise ??= exercisecategory[0];
+                  exercise ??= exercisecategory[0];
 
 
 
@@ -192,7 +192,7 @@ class _dashboardsState extends State<dashboards> {
                                 ),
                                 child: GridView.builder(
                                     shrinkWrap: true,
-                                    itemCount: exercises_.length,
+                                    itemCount: exercisecategory.length,
                                     gridDelegate:  SliverGridDelegateWithFixedCrossAxisCount
                                       (crossAxisCount: 1,
                                       childAspectRatio: Responsive.isMobile(context) &&_size.width
@@ -204,18 +204,21 @@ class _dashboardsState extends State<dashboards> {
                                 {
                                   return featured(
 
-                                    itemName: exercises_[index][0],
+                                    itemName: exercisecategory[index].name,
 
                                     imagePath:exercises_[index][1],
                                     color:  index == checkedIndex? Colors.brown: Colors.black,
-                                    background: exercises_[index][4],
+                                    background: exercisecategory[index].Image,
                                     onPressed: (){
                                       setState(() {
                                         checkedIndex = index;
-                                        if(Responsive.isMobile(context))
-                                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => exercisedescription(
-                                          Exercises: exercises_[index][2],
+                                        exercise = exercisecategory[index];
+
+                                        if(Responsive.isMobile(context)) {
+                                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => exercisedescription(
+                                          Exercise: exercisecategory[index],
                                         )));
+                                        }
 
 
 
@@ -248,7 +251,7 @@ class _dashboardsState extends State<dashboards> {
                              SizedBox(
                                height: 50,
                              ),
-                             exercisedetails(video:"calpage/pexels-tima-miroshnichenko-6388436.mp4",),
+                             exercisedetails(workout: exercise!,),
                            ],
                          )
 

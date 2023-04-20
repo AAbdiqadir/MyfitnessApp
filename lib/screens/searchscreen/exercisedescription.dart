@@ -18,10 +18,10 @@ import '../workoutdetailscreen/video.dart';
 
 class exercisedetails extends StatefulWidget {
    exercisedetails({Key? key,
-  required this.video
+  required this.workout
 
   }) : super(key: key);
-   String video;
+   exercises workout;
 
   @override
   State<exercisedetails> createState() => exercisedetailsState();
@@ -40,7 +40,7 @@ class exercisedetailsState extends State<exercisedetails> {
 
       child: Column(
         children: [
-          Text("Bench press",
+          Text(widget.workout.name,
             style: GoogleFonts.openSans(
               fontSize: 20.0,
               fontWeight: FontWeight.w700,
@@ -51,7 +51,7 @@ class exercisedetailsState extends State<exercisedetails> {
             child: Container(
               width: double.infinity,
               height: height * 0.1,
-              child: video__(),
+              child: video__(video: widget.workout.video),
               // child: videoplayer(
               //   video: widget.video,
               // ),
@@ -84,7 +84,7 @@ class exercisedetailsState extends State<exercisedetails> {
                             SizedBox(
                               height: height *0.3,
                               width: double.infinity,
-                              child: Image.asset("calpage/bench press.jpg",
+                              child: Image.network(widget.workout.ExerciseAnatomy,
                                 fit: BoxFit.cover,
                                 height: height *0.2,
 

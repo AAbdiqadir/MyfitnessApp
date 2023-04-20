@@ -8,6 +8,7 @@ class exercises{
   String Description;
   String video;
   String name;
+  String ExerciseId;
 
   exercises({
 
@@ -16,7 +17,8 @@ class exercises{
     required this.ExerciseAnatomy,
     required this.Description,
     required this.video,
-    required this.name
+    required this.name,
+    required this.ExerciseId
 
 });
 
@@ -26,7 +28,8 @@ class exercises{
     "ExerciseAnatomy":ExerciseAnatomy,
     "Description":Description,
     "video": video,
-    "name":name
+    "name":name,
+    "ExerciseId":ExerciseId
 
   };
   exercises.fromSnapshot(snapshot)
@@ -36,7 +39,10 @@ class exercises{
         ExerciseAnatomy = snapshot.data()["ExerciseAnatomy"],
         Description = snapshot.data()["Description"],
         video = snapshot.data()["video"],
-        type = snapshot.data()["type"];
+        type = snapshot.data()["type"],
+        ExerciseId = snapshot.data()["ExerciseId"]
+
+  ;
 
 
 

@@ -39,7 +39,7 @@ class featured extends StatelessWidget {
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                   color: Colors.transparent,
                   image: DecorationImage(
-                    image: AssetImage(background),
+                    image: NetworkImage(background),
                     fit: BoxFit.cover,
 
 
